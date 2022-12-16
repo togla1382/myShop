@@ -12,35 +12,32 @@
     <!-- 추가head 소스가 삽입되는 지점입니다. -->
     <th:block th:replace="${head}"/>
     <script type="text/javascript">
-    
-		$(function(){
-			menuLoading($(".cate"));
-			hoverCategory();
-		});
-		function hoverCategory(){
-			$(".cate").hover(function(){
-				$(this).find(".cate-wrap").show();
-			}, function(){
-				$(this).find(".cate-wrap").hide();
-			});
-		}
-			
-		function menuLoading(target){
-			//메뉴글씨 영역에 마우스가 들어오면 실행 
-			//console.log("val:"+$(target).val());
-			//var target=$(this);
-			//console.log(target);
-			var pno=target.attr("value");
-			
-			
-			$.ajax({
-				url:`/common/layout/categorys/${pno}`,
-				success:function(result){
-					$(target).find(".cate-wrap").html(result).hide();
-				}
-			});
-		}
-	</script>
+    	//var left=0;
+    	$(function(){
+    		createCategory($(".gnb"));
+    		
+    	});
+    	
+    	function createCategory(target){
+    		var parentNo=$(target).attr("value");
+    		console.log("pno:"+parentNo);
+    		$.ajax({
+    			url:`/common/layout/categorys/${parentNo}`,
+    			success:function(olTag){
+    				$(target).children(".cate-wrap").html(olTag);
+    				
+    				//$(target).children(".sub").children("ol").css("left",left+'px').css("top",0);
+    				//left = left+179;
+    				var sub=$(target).find(".cate");
+    				//console.log(sub);
+    				$.each(sub, subCategory);
+    			}
+    		});
+    	}
+    	function subCategory(){
+    		createCategory($(this));
+    	}
+    </script>
 </head>
 <body>
 	<!-- /////////////////////////////////////////////////// -->
@@ -146,7 +143,7 @@
 				<h1>메인메뉴</h1>
 				<div class="wrap">
 					<ul class="flex">
-						<li class="gnb">
+						<li value="0" class="gnb cate">
 							<a href="#" class="flex">
 								<span class="gnb-icon">
 									<i></i>
@@ -155,62 +152,8 @@
 								</span>
 								<span>전체상품보기</span>
 							</a>
-							<div class="sub">
-								<ol>
-									<li>
-										<a href="#">
-											<span>서브1</span>
-										</a>
-										<ul class="sub-sub">
-											<li>
-												<a href="#">
-													<span>서브1_1</span>
-												</a>
-											</li>
-											<li><a href="#"><span>서브1_2</span></a></li>
-											<li><a href="#"><span>서브1_3</span></a></li>
-											<li><a href="#"><span>서브1_4</span></a></li>
-										</ul>
-									</li>
-									<li>
-										<a href="#">
-											<span>서브2</span>
-										</a>
-										<ul class="sub-sub">
-											<li>
-												<a href="#">
-													<span>서브2_1</span>
-												</a>
-											</li>
-											<li><a href="#"><span>서브2_2</span></a></li>
-											<li><a href="#"><span>서브2_3</span></a></li>
-										</ul>
-									</li>
-									<li>
-										<a href="#">
-											<span>서브3</span>
-										</a>
-										<ul class="sub-sub">
-											<li>
-												<a href="#">
-													<span>서브3_1</span>
-												</a>
-											</li>
-											<li><a href="#"><span>서브3_2</span></a></li>
-											<li><a href="#"><span>서브3_3</span></a></li>
-										</ul>
-									</li>
-									<li>
-										<a href="#">
-											<span>서브4</span>
-										</a>
-										<ul class="sub-sub">
-											<li><a href="#"><span>서브4_1</span></a></li>
-											<li><a href="#"><span>서브4_2</span></a></li>
-											<li><a href="#"><span>서브4_3</span></a></li>
-										</ul>
-									</li>
-								</ol>
+							<div class="cate-wrap">
+								<!-- 카테고리 자동삽입 -->
 							</div>
 						</li>
 						<li><a href="#">오!감동</a></li>

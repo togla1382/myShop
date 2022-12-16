@@ -162,14 +162,16 @@ header{
 #nb>.wrap>ul>li:first-child>a .gnb-icon i:nth-child(3) {
 	top:15px;
 }
-#nb>.wrap>ul>.gnb:hover>.sub{
+
+#nb>.wrap>ul .cate:hover > .cate-wrap{
 	display: block;
 }
-#nb>.wrap>ul>.gnb>.sub{
+
+#nb>.wrap>ul> .cate>.cate-wrap{
 	position: relative;
 	display: none;
 }
-#nb>.wrap>ul>.gnb>.sub ol{
+#nb>.wrap>ul> .cate>.cate-wrap>ol{
 	position: absolute;
 	top:0;
 	left:0;
