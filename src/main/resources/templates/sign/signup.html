@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  
+	th:replace="~{layout/layout02 :: default(~{::head} , ~{::main})}" >
+<!--/* th:replace="~{layout/layout02 :: 태그 or id or fragmentName}" */-->
+<head>
+	<link rel="stylesheet" href="/css/sign/signup.css">
+	<script src="/js/terms.js"></script>
+	<!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+</head>
+<!-- /////////////////////////////////////////////////// -->
+<!-- ///////main  ////////////////////////////////////// -->
+<!-- /////////////////////////////////////////////////// -->
+<main>
+	<h1>메인컨텐츠</h1>
+	<div class="wrap view-size-m">
+		<section>
+			<h1>페이지타이틀</h1>
+			<div class="wrap">
+				<p class="page-tit">회원가입</p>
+			</div>
+		</section>
+		<section id="signup-form">
+			<h1>회원가입 폼</h1>
+			<div class="wrap">
+				<form>
+					<ul>
+						<li>
+							<label for="email">이메일</label>
+							<input class="box-style-common" type="text" id="email" placeholder="이메일">
+							<div class="msg"></div>
+						</li>
+						<li>
+							<label for="pass">비밀번호</label>
+							<input class="box-style-common" type="password" id="pass" placeholder="비밀번호">
+							<div class="msg"></div>
+						</li>
+						<li>
+							<label for="pass-confirm">비밀번호 확인</label>
+							<input class="box-style-common" type="password" id="pass-confirm" placeholder="비밀번호 확인">
+							<div class="msg"></div>
+						</li>
+						<li>
+							<label for="name">이름</label>
+							<input class="box-style-common" type="text" id="name" placeholder="이름">
+							<div class="msg"></div>
+						</li>
+						
+						<li class="terms">
+							<ol>
+								<li>
+									<input type="checkbox" id="terms-all" >
+									<label for="terms-all"><span><b>전제 약관 동의</b></span></label>
+								</li>
+								<li class="flex between">
+									<input type="checkbox" id="join-y">
+									<label for="join-y"><span>[필수] 만 14세 이상입니다.</span></label>
+									<a href="#ex1" rel="modal:open">보기</a>
+								</li>
+								<li class="flex between">
+									<input type="checkbox" id="financial-y">
+									<label for="financial-y"><span>[필수] 전자금융거래약관</span></label>
+									<a href="#">보기</a>
+								</li>
+								<li>
+									<div class="flex between">
+										<input type="checkbox" id="privacy-y">
+										<label for="privacy-y"><span>[필수] 개인정보 수집 및 이용동의</span></label>
+										<a href="#">보기</a>
+									</div>
+									<div class="terms-box">
+										<p>
+											※ 개인정보 수집
+										</p>
+										<dl class="flex">
+											<dt>목적</dt>
+											<dd>개인식별, 서비스 이용알림, 고객 고충 처리</dd>
+										</dl>
+										<dl class="flex">
+											<dt>항목</dt>
+											<dd>이름, 아이디, 비밀번호, 전화번호</dd>
+										</dl>
+										<dl class="flex">
+											<dt>보유기간</dt>
+											<dd><strong>회원탈퇴 시 즉시 파기</strong></dd>
+										</dl>
+									</div>
+								</li>
+								<li>
+									<div class="flex between">
+										<input type="checkbox" id="privacy-etc-y">
+										<label for="privacy-etc-y"><span>[선택] 선택정보 수집 및 이용동의</span></label>
+										<a href="#">보기</a>
+									</div>
+									<div class="terms-box">
+										<p>
+											※ 선택 정보 수집
+										</p>
+										<dl class="flex">
+											<dt>목적</dt>
+											<dd>혜택, 서비스 알림</dd>
+										</dl>
+										<dl class="flex">
+											<dt>항목</dt>
+											<dd>이메일, 추천인 아이디</dd>
+										</dl>
+										<dl class="flex">
+											<dt>보유기간</dt>
+											<dd><strong>회원탈퇴 시 즉시 파기</strong></dd>
+										</dl>
+									</div>
+								</li>
+								<li class="flex between">
+									<input type="checkbox" id="sms-email-y">
+									<label for="sms-email-y"><span>[선택] 혜택 정보 및 광고 수신동의(SMS, E-mail)</span></label>
+									<a href="#">보기</a>
+								</li>
+							</ol>
+							
+						</li>
+						
+						<li>
+							<p class="join-text">
+								오아시스마켓 이용약관 및 개인정보 동의 내용을 확인하였으며,<br/>
+								위 내용에 동의합니다. 만 14세 미만 아동은 회원가입이 불가합니다.
+							</p>
+							<button class="btn-style-common">회원가입</button>
+						</li>
+					</ul>
+				</form>
+				<div id="ex1" class="modal">
+				  <p>모달이 적용된 클래스</p>
+				  <p>[필수] 만 14세 이상입니다. 약관내용들.....을 들어가면 출력됩니다.</p>
+				  <a href="#" rel="modal:close">Close</a>
+				</div>
+			</div>
+		</section>
+		
+	</div>
+</main>
+</html>

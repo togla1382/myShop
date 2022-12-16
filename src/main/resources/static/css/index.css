@@ -1,0 +1,95 @@
+@charset "UTF-8";
+#container>.wrap>*{
+	margin-top: 50px;
+}
+.title{
+	font-size: 36px;
+	color: #333;
+	font-weight: bold;
+	text-align: center;
+}
+#today-sale>.wrap>.tab-menu{
+	margin: 20px 0;
+}
+#today-sale>.wrap>.tab-menu li.target::before{
+	content: "";
+	background-color:#333;
+	width:4px;
+	height:4px;
+	border-radius:50%;
+	position: absolute;
+	top:0;
+	left: 50%;
+}
+#today-sale>.wrap>.tab-menu li.target{
+	text-decoration: underline;
+	text-underline-position: from-font;
+	position: relative;
+}
+#today-sale>.wrap>.tab-menu li{
+	padding: 0.5em 1em;
+	cursor: pointer;
+	font-size: 18px;
+	color: #777;
+}
+#today-sale>.wrap .area{
+	position: relative;
+}
+#today-sale>.wrap #display{
+	overflow: hidden;
+}
+#today-sale>.wrap #display>ol>li.goods-list{
+	width: 282px;
+	margin-right: 24px;
+}
+#today-sale>.wrap #display>ol>li>div.goods-img>a{
+	position: relative;
+	display: block;
+	width: 282px;
+	height: 282px;
+	background-image: url("/images/goods/goods_1.gif");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	
+}
+#today-sale>.wrap #display>ol>li>div.goods-img>a span{
+	position: absolute;
+	display: flex;
+	justify-content: space-between;
+	padding: 0 1em;
+	width:100%;
+	height: 30px;
+	line-height: 30px;
+	bottom: 0;
+	color:#fff;
+	background-color: rgba(47,91,3, 0.7);
+}
+#today-sale>.wrap #display>ol>li>div.goods-img>a span em strong:not(:last-child)::after{
+	content: ":";
+	padding: 0 0.5em;
+	color: rgba(255,255,255, .5);
+}
+
+#today-sale>.wrap #display>ol>li>div.goods-info{
+	padding: 12px 0;
+}
+#today-sale>.wrap #display>.btn button{
+	position: absolute;
+	top: calc( 282px / 2 - 20px);
+	width: 40px;
+	height: 40px;
+	border: 1px solid #d9d9d9;
+	border-radius: 50%;
+	box-shadow: 0 0 20px rgb(255, 255, 185);
+	background: no-repeat center / 50%;
+}
+#today-sale>.wrap #display>.btn .sale-prev{
+	background-image: url("/images/icon/angle-left-solid.svg");
+	left: -20px;
+	display: none;
+}
+#today-sale>.wrap #display>.btn .sale-next{
+	background-image: url("/images/icon/angle-right-solid.svg");
+	right: -20px;
+}

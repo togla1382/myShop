@@ -1,0 +1,221 @@
+@charset "UTF-8";
+/* 공백 : 하위 모든자식 요소 */
+/* > : 하위 직계자식 요소 */
+/* html body header>.wrap #menu-top{} */
+
+
+header{
+	border-bottom: 1px solid #e9e9e9;
+}
+/* 메뉴상단 CSS*/
+#menu-top{
+	font-size: 12px;
+	margin-top: 20px;
+}
+
+#menu-top a{color: #797979}
+#unb>.wrap ul li:not(:first-child)::before,
+#snb>.wrap ul li:first-child::after{
+	content:"";
+	display: inline-block;
+	width: 0px;
+	height: 10px;
+	border-left: 1px solid #a9a9a9;
+	position: relative;
+	top: 1px;
+}
+#snb>.wrap ul li a.btn-style1{color: #222}
+#snb>.wrap ul li a.btn-style1::after{
+	content: "";
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-top: 3px solid transparent;
+	border-bottom: 3px solid transparent;
+	border-left: 4px solid #a9a9a9; 
+	position: relative;
+	bottom: 1.5px; 
+	left: 3px;
+}
+/* #snb>.wrap ul li:last-child a{color: #222} */
+/* #menu-top>.wrap section>.wrap ul li a{color: #797979} */
+
+/* ul의 첫번째 자식요소 하위의 a */
+#snb>.wrap ul li:first-child a{
+	padding-left: 0;
+}
+
+#snb>.wrap ul li a{
+	padding: 0 10px;
+}
+
+#unb>.wrap ul li:last-child a{
+	padding-right: 0;
+}
+
+#unb>.wrap ul li a{
+	padding: 0 10px;
+}
+
+/* ////logo////////////////////// */
+#logo-search{
+	margin: 40px 0 20px;
+}
+#logo>.wrap a{
+	font-size: 0;
+}
+#logo>.wrap a span {
+	font-weight: 700;
+	display:inline-block;
+	width: 40px;
+	height: 40px;
+	background-color: green;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 36px;
+	color: #fff;
+	font-size: 36px;
+}
+#search>.wrap form{
+	width: 500px;
+	height: 50px;
+	background-color: #e9e9e9;
+	border-radius: 25px;
+	padding: 0 20px;
+	position: relative;
+}
+#search>.wrap form input:focus{
+	outline: none;
+	border: 1px solid green;
+}
+#search>.wrap form input{
+	height: 50px;
+	width:410px;
+	border: none;
+	background-color: transparent;
+}
+#search>.wrap form button{
+	position: absolute;
+	top:0;
+	right:20px;
+	width: 50px;
+	height: 50px;
+	background-image: url("/images/icon/magnifying-glass-solid.svg");
+	background-size: 50%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+#delivery>.wrap{
+	margin-top: 10px;
+}
+#delivery>.wrap img{
+	margin-right: 2px;
+}
+/* /////////////////////////// */
+#nb>.wrap>ul>li>a{
+	/* height: 54px; */
+	line-height: 54px;
+}
+#nb>.wrap>ul>li>a{
+	width: 100px;
+	display: inline-block;
+}
+#nb>.wrap>ul>li:first-child>a{
+	width: 160px;
+}
+
+#nb>.wrap>ul>li:first-child>a .gnb-icon{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	position: relative;
+	top: 4px;
+	background-color: green;
+	border-radius:5px;
+	overflow: hidden;
+}
+#nb>.wrap>ul>li:first-child>a .gnb-icon i{
+	display: block;
+	width: 20px;
+	border: 1px solid #fff;
+	position: absolute;
+	left: 0;
+	transition: transform 0.2s
+}
+#nb>.wrap>ul>li:first-child>a:hover .gnb-icon i:nth-child(1){
+	left: 4px;
+	transform: rotate(45deg);
+}
+#nb>.wrap>ul>li:first-child>a:hover .gnb-icon i:nth-child(2){
+	transform: rotate(180deg);
+}
+#nb>.wrap>ul>li:first-child>a:hover .gnb-icon i:nth-child(3){
+	left: 4px;
+	transform: rotate(-45deg);
+}
+#nb>.wrap>ul>li:first-child>a .gnb-icon i:nth-child(1) {
+	top:3px;
+}
+#nb>.wrap>ul>li:first-child>a .gnb-icon i:nth-child(2) {
+	top:9px;
+}
+#nb>.wrap>ul>li:first-child>a .gnb-icon i:nth-child(3) {
+	top:15px;
+}
+#nb>.wrap>ul>.gnb:hover>.sub{
+	display: block;
+}
+#nb>.wrap>ul>.gnb>.sub{
+	position: relative;
+	display: none;
+}
+#nb>.wrap>ul>.gnb>.sub ol{
+	position: absolute;
+	top:0;
+	left:0;
+	z-index: 100;
+	background-color: rgba(255,255,255, 1);
+	width: 180px;
+	border: 1px solid #a9a9a9;
+	height: calc(36px*4);
+}
+#nb>.wrap>ul>.gnb>.sub ol li{
+	padding: 0.5em 2em;
+	font-size: 14px;
+	height: 36px;
+}
+#nb>.wrap>ul>.gnb>.sub ol>li:hover>a::after{
+	display: inline-block;
+}
+#nb>.wrap>ul>.gnb>.sub ol>li>a::after{
+	content: ">";
+	font-size:14px;
+	display: none;
+	box-sizing: border-box;
+}
+#nb>.wrap>ul>.gnb>.sub ol>li>a{
+	display: flex;
+	justify-content: space-between;
+	font-size: 0;
+}
+#nb>.wrap>ul>.gnb>.sub ol>li>a>*{
+	font-size: 14px;
+}
+#nb>.wrap>ul>.gnb>.sub ol>li:hover ul.sub-sub{
+	display: block;
+}
+#nb>.wrap>ul>.gnb>.sub ol>li ul.sub-sub{
+	position: absolute;	
+	z-index: 101;
+	top:-1px;
+	left:178px;
+	background-color: rgba(255,255,255, 1);
+	width: 180px;
+	border: 1px solid #a9a9a9;
+	display: none;
+	height: calc(36px*4);
+}
+
+
+
+

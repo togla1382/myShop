@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<ol>
+		<th:block th:each=" dto : ${list}">
+		<li th:value="${dto.no}"  class="sub cate">
+			<a href="#" th:text="${dto.name}">카테고리명</a>
+			<div class="cate-wrap">
+			</div>
+		</li>
+		</th:block>
+	</ol>
+	<script type="text/javascript">
+		
+	</script>
+</html>

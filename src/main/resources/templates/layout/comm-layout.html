@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+ th:fragment="commLayout(head, main)">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+	<link rel="stylesheet" href="/css/commons/common.css">
+    <link rel="stylesheet" href="/css/commons/header.css">
+	<link rel="stylesheet" href="/css/commons/footer.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!-- 추가head 소스가 삽입되는 지점입니다. -->
+    <th:block th:replace="${head}"/>
+    <script type="text/javascript">
+    
+		$(function(){
+			menuLoading($(".cate"));
+			hoverCategory();
+		});
+		function hoverCategory(){
+			$(".cate").hover(function(){
+				$(this).find(".cate-wrap").show();
+			}, function(){
+				$(this).find(".cate-wrap").hide();
+			});
+		}
+			
+		function menuLoading(target){
+			//메뉴글씨 영역에 마우스가 들어오면 실행 
+			//console.log("val:"+$(target).val());
+			//var target=$(this);
+			//console.log(target);
+			var pno=target.attr("value");
+			
+			
+			$.ajax({
+				url:`/common/layout/categorys/${pno}`,
+				success:function(result){
+					$(target).find(".cate-wrap").html(result).hide();
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<!-- /////////////////////////////////////////////////// -->
+	<!-- ///////header////////////////////////////////////// -->
+	<!-- /////////////////////////////////////////////////// -->
+	<header>
+		<h1>상단영역</h1>
+		<div class="wrap view-size">
+			<!-- ///////메뉴상단////////////////////////////////////// -->
+			<nav id="menu-top">
+				<h1>메뉴상단</h1>
+				<div class="wrap flex between">
+					<section id="snb">
+						<h1>사이트메뉴</h1>
+						<div class="wrap">
+							<ul class="flex">
+								<li>
+									<a href="#">베스트후기</a>
+								</li>
+								<li>
+									<a href="/customers">고객센터</a>
+								</li>
+								<li>
+									<a href="/customers/home">고객센터2</a>
+								</li>
+								<li>
+									<a class="btn-style1" href="#">이벤트/기획전</a>
+								</li>
+							</ul>
+						</div>
+					</section>
+					<section id="unb">
+						<h1>유저메뉴</h1>
+						<div class="wrap">
+							<ul class="flex">
+								<li sec:authorize="isAnonymous()">
+									<a href="/member/login">로그인</a>
+									<a href="/member/signup">회원가입</a>
+									<a href="/common/chat">메세지</a>
+								</li>
+								<li sec:authorize="isAuthenticated()">
+									<!-- <span th:text="${#authentication.name+'(이름)'}">유저네임정보</span> -->
+									<span sec:authentication="principal.email"></span>
+									(
+									<span th:if="${#authentication.principal.nickName==null}"  sec:authentication="principal.name"></span>
+									<span th:if="${#authentication.principal.nickName!=null}" sec:authentication="principal.nickName"></span>
+									)
+									<a href="/logout">로그아웃</a>
+								</li>
+								<li>
+									<a href="#">마이페이지</a>
+								</li>
+								<li>
+									<a href="#">주문/배송조회</a>
+								</li>
+								<li>
+									<a href="#">장바구니</a>
+								</li>
+								<li sec:authorize="hasRole('ADMIN')">
+									<a href="/admin">관리자페이지</a>
+								</li>
+							</ul>
+						</div>
+					</section>
+				</div>
+			</nav>
+			<!-- ///////로고&검색////////////////////////////////////// -->
+			<section id="logo-search">
+				<h1>로고&amp;검색</h1>
+				<div class="wrap flex between">
+					<section id="logo">
+						<h1>로고</h1>
+						<div class="wrap">
+							<a href="/">
+								<span>G</span>
+								<span>R</span>
+								<span>E</span>
+								<span>E</span>
+								<span>N</span>
+							</a>
+						</div>
+					</section>
+					<section id="search">
+						<h1>검색</h1>
+						<div class="wrap">
+							<form >
+								<input type="text" name="search" placeholder="바른먹거리를 찾으세요?">
+								<button></button>
+							</form>
+						</div>
+					</section>
+					<section id="delivery">
+						<h1>배송지</h1>
+						<div class="wrap">
+							<img alt="aaa" src="/images/icon/location-dot-solid.svg" width="10px">
+							<a  href="#">배송지정보를 입력해 주세요&gt;</a>
+						</div>
+					</section>
+				</div>
+			</section>
+			<!-- ///////메인메뉴////////////////////////////////////// -->
+			<nav id="nb">
+				<h1>메인메뉴</h1>
+				<div class="wrap">
+					<ul class="flex">
+						<li class="gnb">
+							<a href="#" class="flex">
+								<span class="gnb-icon">
+									<i></i>
+									<i></i>
+									<i></i>
+								</span>
+								<span>전체상품보기</span>
+							</a>
+							<div class="sub">
+								<ol>
+									<li>
+										<a href="#">
+											<span>서브1</span>
+										</a>
+										<ul class="sub-sub">
+											<li>
+												<a href="#">
+													<span>서브1_1</span>
+												</a>
+											</li>
+											<li><a href="#"><span>서브1_2</span></a></li>
+											<li><a href="#"><span>서브1_3</span></a></li>
+											<li><a href="#"><span>서브1_4</span></a></li>
+										</ul>
+									</li>
+									<li>
+										<a href="#">
+											<span>서브2</span>
+										</a>
+										<ul class="sub-sub">
+											<li>
+												<a href="#">
+													<span>서브2_1</span>
+												</a>
+											</li>
+											<li><a href="#"><span>서브2_2</span></a></li>
+											<li><a href="#"><span>서브2_3</span></a></li>
+										</ul>
+									</li>
+									<li>
+										<a href="#">
+											<span>서브3</span>
+										</a>
+										<ul class="sub-sub">
+											<li>
+												<a href="#">
+													<span>서브3_1</span>
+												</a>
+											</li>
+											<li><a href="#"><span>서브3_2</span></a></li>
+											<li><a href="#"><span>서브3_3</span></a></li>
+										</ul>
+									</li>
+									<li>
+										<a href="#">
+											<span>서브4</span>
+										</a>
+										<ul class="sub-sub">
+											<li><a href="#"><span>서브4_1</span></a></li>
+											<li><a href="#"><span>서브4_2</span></a></li>
+											<li><a href="#"><span>서브4_3</span></a></li>
+										</ul>
+									</li>
+								</ol>
+							</div>
+						</li>
+						<li><a href="#">오!감동</a></li>
+						<li><a href="#">인기추천</a></li>
+						<li><a href="#">오픈마켓</a></li>
+						<li><a href="#">브랜드몰</a></li>
+						<li><a href="#">소상공인</a></li>
+						<li><a href="#">희망장터</a></li>
+						<li><a href="#">찬들마루</a></li>
+						<li><a href="/test2">구독Run</a></li>
+						<li><a href="/test">비디오쇼핑</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</header>
+	
+	<!-- 메인영역이 삽입되는 지점입니다. -->
+	<th:block th:replace="${main}"/>
+	<!-- /////////////////////////////////////////////////// -->
+	<!-- ///////footer////////////////////////////////////// -->
+	<!-- /////////////////////////////////////////////////// -->
+	<footer id="footer-tag">
+		<h1>하단영역</h1>
+		<div class="wrap">
+			<!-- /////푸터메뉴/////////////////////// -->			
+			<nav id="f-menu">
+				<h1>푸터메뉴</h1>
+				<div class="wrap view-size">
+					<ul class="flex">
+						<li><a href="#">오아시스 소개</a></li>
+						<li><a href="#">매장안내</a></li>
+						<li><a href="#">약관 및 정책</a></li>
+						<li class="privacy"><a href="#">개인정보 취급방침</a></li>
+						<li><a href="#">고객센터</a></li>
+						<li><a href="#">입점문의</a></li>
+						<li><a href="#">인재채용</a></li>
+					</ul>
+				</div>
+			</nav>
+			<!-- //////////////////////////// -->
+			<!-- /////회사정보&amp;고객센터/////////////////////// -->			
+			<section id="com-cus">
+				<h1>회사정보&amp;고객센터</h1>
+				<div class="wrap flex between view-size">
+					<!-- /////회사/////////////////////// -->
+					<section id="com">
+						<h1>회사</h1>
+						<div class="wrap">
+							<!-- ///회사정보///////////////////////// -->
+							<section id="info">
+								<h1>회사정보</h1>
+								<div class="wrap">
+									<p class="tit">코딩그라운드</p>
+									<div class="con">
+										<dl class="flex">
+											<dt>서울사무소</dt>
+											<dd><address>서울특별시 노원구 상계로3길 21 3층, 6층</address></dd>
+										</dl>
+										<dl class="flex">
+											<dt>경기광주 본사</dt>
+											<dd><address>경기도 광주시 퇴촌면 정영로277번길 31-5</address></dd>
+										</dl>
+										<script type="text/javascript">
+										function onopen()
+										{
+										var url =
+										"http://www.ftc.go.kr/bizCommPop.do?wrkr_no=4728800237";
+										window.open(url, "bizCommPop", "width=750, height=700;");
+										}
+										</script>
+										<dl class="flex">
+											<dt>상호</dt>
+											<dd>코딩그라운드</dd>
+											<dt>대표자</dt>
+											<dd>조재청</dd>
+											<dt>사업자등록번호</dt>
+											<dd>000-00-00000 <a onclick="onopen();">사업자정보확인</a></dd>
+											<dt>통신판매업신고번호</dt>
+											<dd>제 2000-경기광주-0000</dd>
+										</dl>
+									</div>
+								</div>
+							</section>
+							<!-- //////////////////////////// -->
+							<!-- ///카피라이트///////////////////////// -->
+							<section id="copy">
+								<h1>카피라이트</h1>
+								<div class="wrap">
+									Copyright &copy; codingground Corp. All Rights Reserved.
+								</div>
+							</section>
+							<!-- //////////////////////////// -->
+						</div>
+					</section>
+					<!-- //////////////////////////// -->
+					<!-- ////고객센터//////////////////////// -->
+					<section id="customer">
+						<h1>고객센터</h1>
+						<div class="wrap">
+							<!-- ////전화번호//////////////////////// -->
+							<section id="center">
+								<h1>전화번호</h1>
+								<div class="wrap">
+									<p class="tit">
+									고객센터 <a href="tel:01030390089">010-3039-0089</a>
+									</p>
+									<div class="con">
+										<dl class="flex">
+											<dt>평일</dt>
+											<dd>07:00~22:00</dd>
+											<dt>토/일</dt>
+											<dd>09:00~16:00</dd>
+										</dl>
+										<dl class="flex">
+											<dt>점심</dt>
+											<dd>12:00~13:00</dd>
+										</dl>
+										<div>
+											<a href="#">고객센터바로가기&gt;</a>
+										</div>
+									</div>
+								</div>
+							</section>
+							<!-- //////////////////////////// -->
+							<!-- ////SNS//////////////////////// -->
+							<section id="sns">
+								<h1>SNS</h1>
+								<div class="wrap">
+									<ul class="flex">
+										<li><a href="#" style="background-image: url('/images/icon/w_footer_sns01.png');"></a></li>
+										<li><a href="#" style="background-image: url('/images/icon/w_footer_sns02.png');"></a></li>
+										<li><a href="#" style="background-image: url('/images/icon/w_footer_sns03.png');"></a></li>
+										<li><a href="#" style="background-image: url('/images/icon/w_footer_sns04.png');"></a></li>
+									</ul>
+								</div>
+							</section>
+							<!-- //////////////////////////// -->
+						</div>
+					</section>
+					<!-- //////////////////////////// -->
+				</div>
+			</section>
+		</div>
+	</footer>
+</body>
+</html>

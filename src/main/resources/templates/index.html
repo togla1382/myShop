@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ th:replace="~{layout/comm-layout :: commLayout(~{this::head}, ~{::main})}">
+<head>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/visual.css">
+    <script src="/js/visual.js"></script>
+</head>
+<!-- /////////////////////////////////////////////////// -->
+<!-- ///////main  ////////////////////////////////////// -->
+<!-- /////////////////////////////////////////////////// -->
+<main>
+	<h1>메인컨텐츠</h1>
+	<div class="wrap">
+		<section id="visual">
+			<h1>비주얼영역</h1>
+			<div class="wrap">
+				<div class="area">
+					<ol class="flex visuals">
+						<li th:each="num : ${#numbers.sequence(1,15)}">
+							<a href="#" th:style="|background-image: url('/images/visual/visual${num}.jpg');|">[[${num}]]</a>
+						</li>
+					</ol>
+					<div class="cover">
+						<div class="side left"></div>
+						<div class="side right"></div>
+					</div>
+					<div class="btn-wrap">
+						<button class="btn prev"></button>
+						<button class="btn next"></button>
+					</div>
+				</div>
+				
+			</div>
+		</section>
+		<section id="container">
+			<h1>메인컨텐츠</h1>
+			<div class="wrap view-size">
+				<section id="today-sale">
+					<h1>오늘의 특가</h1>
+					<div class="wrap">
+						<p class="title">오늘의 특가</p>
+						
+						<ul class="tab-menu flex center">
+							<li class="target" value="1">타임특가</li>
+							<li value="2">한정특가</li>
+							<li value="3">브랜드특가</li>
+						</ul>
+						<div class="area">
+							<div id="display">
+							<!-- 서버에서 불러온 상품들 list.html ol태그삽입 -->
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- /////////////////////////////////// -->
+				<!-- ////오!감동특가/////////////////////////////// -->
+				<!-- /////////////////////////////////// -->
+				<section>
+					<h1>오!감동특가</h1>
+					<div class="wrap">
+						<p class="title">오!감동특가</p>
+						<ul>
+							<li>목록을 넣어주세요</li>
+						</ul>
+					</div>
+				</section>
+			</div>
+		</section>
+	</div>
+</main>
+</html>

@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+header>.wrap{
+	background-color: rgba(0, 0, 64, 100%);
+	color: #fff;
+	padding: 10px 20px;
+	height: 100vh;
+}
+header>.wrap a{
+	color: #fff;
+}
+header>.wrap ul>li{
+	margin-top: 20px;
+}
+
+header>.wrap ul>li dl>dt{
+	font-weight: 700;
+	color:  rgba(255, 255, 255, 60%);
+	border-bottom: 0.5px dotted  rgba(255, 255, 255, 60%);
+	padding: 0.5em 0;
+}
+header>.wrap ul>li dl>dd{
+	font-size: 14px;
+	padding: 0.3em 0 0.3em 10px;
+}
+main>.wrap{
+	padding-top: 30px;
+	padding-left: 20px;
+}

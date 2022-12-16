@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<select class="category" name="categoryNo"  onchange="subCateSelected(this)">
+		<option class="depth">카테고리선택</option>
+		<th:block th:each="dto:${list}">
+		<option  th:if="${dto.name!=''}" th:value="${dto.no}" th:text="${dto.name}">카테고리 이름</option>
+		<option  th:if="${dto.name==''}" th:value="${dto.no}" >세분류 없음</option>
+		</th:block>
+		
+	</select>
+	<script type="text/javascript">
+		
+	</script>
+	
+</html>

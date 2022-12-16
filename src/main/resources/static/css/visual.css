@@ -1,0 +1,72 @@
+@charset "UTF-8";
+#visual>.wrap{
+	position: relative;
+	overflow: hidden;
+}
+#visual>.wrap>.area{
+	width: 815px;
+	height: 363px;
+	margin: 0 auto;
+	overflow: visible;
+	position: relative;
+}
+/* 
+#visual>.wrap>.area ol{
+	margin-left: calc( -415px * 4 );
+}
+ */
+#visual>.wrap>.area ol li{
+	margin-right: 15px;
+}
+#visual>.wrap>.area ol li a{
+	display: block;
+	width: 400px;
+	height: 363px;
+	text-align: center;
+	line-height: 363px;
+	font-size: 50px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+#visual>.wrap>.area .cover .side{
+	position: absolute;
+	top: 0;
+	height: 363px;
+	width: 50vw;
+	background-color: rgba(255,255,255, 0.75);
+	
+}
+#visual>.wrap>.area .cover .left{
+	left: -50vw;
+}
+#visual>.wrap>.area .cover .right{
+	left: 815px;
+}
+#visual>.wrap>.area .btn-wrap .btn{
+	position: absolute;
+	z-index: 100;
+	top: calc(50% - 25px);
+	opacity: 15%;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	font-size: 0;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	box-shadow: 0 0 20px rgb(255, 255, 185);
+}
+#visual>.wrap>.area .btn-wrap .prev{
+	left: -25px;
+	background-image: url("/images/icon/circle-chevron-left-solid.svg");
+}
+#visual>.wrap>.area .btn-wrap .next{
+	right: -25px;
+	background-image: url("/images/icon/circle-chevron-right-solid.svg");
+}
+
+
+
+

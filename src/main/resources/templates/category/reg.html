@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:insert="~{layout/admin-layout :: head}"/>
+    <!-- 해당하는 페이지의 css나 js를 아래에 적용 -->
+    <link rel="stylesheet" href="/css/default.css">
+    <script type="text/javascript">
+		$(function(){
+			$("#cate1").keyup(fnKeyup);
+		});
+		
+		
+		function fnKeyup(){
+			var fcate=$(this);
+			var in_text=$(this).val().trim();
+			if(in_text.length < 2){
+				fcate.next().text("");
+				return;
+			}
+			console.log(in_text);
+			console.log(in_text.length);
+			
+			$.ajax({
+				url:`/admin/categorys/${in_text}`,
+				success:function(result){
+					if(result==true){
+						fcate.next().text("등록가능").css("color","green");
+					}else{
+						fcate.next().text("존재하는 카테고리명").css("color","red");
+					}
+					
+				}
+			});
+			
+		}
+	</script>
+</head>
+<body class="flex">
+    <th:block th:insert="~{layout/admin-layout :: header}"/>
+    <main>
+    	<h1>메인컨텐츠</h1>
+    	<div class="wrap">
+    		<p>카테고리 등록페이지</p>
+    		
+    		<form action="/admin/categorys" method="post">
+    			<ul class="flex">
+    				<li>
+    					<input type="text" id="cate1" name="name" placeholder="1차카데고리" required="required">
+    					<div class="msg"></div>
+    				</li>	
+    				<li>
+		    			<input type="text" name="name" placeholder="2차카데고리" required="required">
+		    			<div class="msg"></div>
+    				</li>
+    				<li>
+		    			<input type="text" name="name" placeholder="3차카데고리" required="required" >
+		    			<div class="msg"></div>
+    				</li>
+    				<li>
+		    			<input type="text" name="name" placeholder="4차카데고리">
+		    			<div class="msg"></div>
+    				</li>
+    				<li>
+    					<button>등록</button>
+    				</li>
+    			</ul>
+    			
+    		</form>
+    	</div>
+    </main>
+</body>
+</html>

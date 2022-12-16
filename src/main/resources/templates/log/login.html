@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ th:replace="~{layout/comm-layout :: commLayout(~{this::head}, ~{::main})}">
+<head>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<main>
+	<h1>메인영역</h1>
+	<div class="wrap view-size">
+		<p>로그인페이지</p>
+		<form action="/member/login"  method="post">
+			<ul>
+				<li>
+					<input type="text" name="email" placeholder="이메일">
+				</li>
+				<li>
+					<input type="password" name="pass" placeholder="비밀번호">
+				</li>
+				<li>
+					<button>로그인</button>
+				</li>
+			</ul>
+		</form>
+	</div>
+</main>
+</html>

@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+.img{
+	width: 100px;
+	height: 100px;
+	background-color: rgba(0,255,255, 25%);
+	border: 1px dashed #e9e9e9;
+	text-align: center;
+	line-height: 100px;
+	font-size: 32px;
+	/* background-image: url(""); */
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+main input[type=file]{
+	display: none;
+}

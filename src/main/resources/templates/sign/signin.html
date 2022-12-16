@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    	<link rel="stylesheet" href="/css/commons/reset.css">
+		<link rel="stylesheet" href="/css/commons/common.css">
+        <link rel="stylesheet" href="/css/sign/signin.css">
+    </head>
+    <body>
+    	<header>
+    		<h1>로그인페이지</h1>
+    		<div class="wrap  view-size-m">
+    			<p class="page-tit"><a href="/">HOME</a></p>
+    		</div>
+    	</header>
+    	<main>
+    		<h1>로그인페이지</h1>
+    		<div class="wrap  view-size-m">
+    			<section >
+    				<h1>로그인</h1>
+    				<div class="wrap">
+    					<p class="page-tit">로그인</p>
+    				</div>
+    			</section>
+    			<section id="login-form">
+    				<h1>로그인 입력폼</h1>
+    				<div class="wrap">
+    					<form action="/member/login"  method="post">
+    						<ul>
+    							<li>
+    								<input class="box-style-common" type="text" name="email" placeholder="이메일">
+    							</li>
+    							<li>
+    								<input class="box-style-common" type="password" name="pass" placeholder="비밀번호">
+    							</li>
+    							<li class="user-info-support flex between">
+    								<div>
+    									<input type="checkbox" id="chbox-idsave" >
+    									<label for="chbox-idsave">아이디 저장</label>
+    								</div>
+    								<div class="ch font-zero">
+    									<span><a href="#">아이디 찾기</a></span>
+    									<span><a href="#">비밀번호 변경</a></span>
+    								</div>
+    							</li>
+    							<li>
+    								<button class="btn-style-common">로그인</button>
+    							</li>
+    						</ul>
+    					</form>
+    				</div>
+    			</section>
+    			<section id="social">
+    				<h1>소셜 로그인</h1>
+    				<div class="wrap">
+    					<ul class="flex around">
+    						<li><a href="#">카카오톡</a></li>
+    						<li><a href="#">네이버</a></li>
+    						<li><a href="#">구글</a></li>
+    						<li><a href="#">애플</a></li>
+    					</ul>
+    				</div>
+    			</section>
+    		</div>
+    	</main>
+    </body>
+</html>
