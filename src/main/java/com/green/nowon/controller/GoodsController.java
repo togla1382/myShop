@@ -20,6 +20,12 @@ public class GoodsController {
 	@Autowired
 	private GoodsService service;
 	
+	@GetMapping("/common/category/{no}/goods")
+	public String goodsOfCategory(@PathVariable long no, Model model) {
+		service.goodsOfCategory(no, model);
+		return "goods/category-list";
+	}
+	
 	@PostMapping("/admin/goods")
 	public String goods(GoodsInsertDTO dto) {
 		service.save(dto);

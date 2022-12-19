@@ -55,10 +55,13 @@ public class CategoryServiceProcess implements CategoryService {
 		
 	}
 
+	//
 	@Override
 	public void categoryList(Long parentNo, Model model) {
+		//model.addAttribute("depth", repo.findById(parentNo));
 		if(parentNo.intValue()==0)parentNo=null;//null 은 1차카테고리
 		model.addAttribute("list", repo.findByParentNoOrderByNameAsc(parentNo));
+		
 		
 	}
 

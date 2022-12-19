@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ th:replace="~{layout/comm-layout :: commLayout(~{this::head}, ~{::main})}">
+<head>
+    <!-- 해당하는 페이지의 css나 js를 아래에 적용 -->
+    <link rel="stylesheet" href="/css/goods/comm.css">
+</head>
+<main>
+	<h1>메인컨텐츠</h1>
+	<div class="wrap view-size">
+		<div class="flex">
+			<span>
+				<a th:href="|/common/layout/categorys/${cate.no}|" th:text="${cate.name}"></a>
+			</span>
+			<p class="page-tit" th:text="${cate.name}">상품 리스트</p>
+		</div>
+		<ul class="grid-container">
+			<li th:each="dto:${list}">
+				<div>
+					<a href="#"><img height="280px" th:src="${dto.defImgUrl}"></a>
+				</div>
+				<div class="info">
+					<p>
+						<a href="#"><span>[[${dto.title}]]</span></a>
+					</p>
+					<div class="price">
+						<i>
+ 						<span>sale정보</span>
+ 						<span>기본가격</span>
+						</i>
+						<span>[[${dto.price}]]</span>
+					</div>
+					<div>구매평점</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</main>
+</html>

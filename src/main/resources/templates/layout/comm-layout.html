@@ -15,7 +15,6 @@
     	//var left=0;
     	$(function(){
     		createCategory($(".gnb"));
-    		
     	});
     	
     	function createCategory(target){
@@ -35,6 +34,7 @@
     		});
     	}
     	function subCategory(){
+    		//console.log($(this).attr("value"));
     		createCategory($(this));
     	}
     </script>

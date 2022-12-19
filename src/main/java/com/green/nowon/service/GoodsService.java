@@ -13,4 +13,7 @@ public interface GoodsService {
 
 	void save(GoodsInsertDTO dto);
 
+
+	void goodsOfCategory(long cateNo, Model model);
+
 }

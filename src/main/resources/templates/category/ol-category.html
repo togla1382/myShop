@@ -3,7 +3,7 @@
 	<ol>
 		<th:block th:each=" dto : ${list}">
 		<li th:value="${dto.no}"  th:class="|sub cate ${'cate-'+dto.depth}|">
-			<a href="#" >
+			<a th:href="|/common/category/${dto.no}/goods|" >
 				<span th:text="${dto.name}">카테고리명</span>
 			</a>
 			<div class="cate-wrap">
