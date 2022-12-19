@@ -4,3 +4,25 @@
   display: grid;
   grid-template-columns: auto auto auto auto;
 }
+
+.list-item{
+	width: 300px;
+	padding: 10px;
+}
+.item-info{
+	padding: 12px 0 40px;
+}
+.info-title{
+	line-height: 1.25;
+	min-height: 44px;
+}
+.category-path {
+	font-size: 14px;
+	color: #777;
+}
+.category-path .seperator{
+	margin: 0 5px;
+}
+.category-path .cate-name:first-child  a{
+	font-weight: 700;
+}

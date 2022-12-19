@@ -1,5 +1,6 @@
 package com.green.nowon.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -44,28 +45,24 @@ public class GoodsServiceProcess implements GoodsService {
 	@Autowired
 	CategoryEntityRepository cateRepo;
 	
+	List<CategoryEntity> cates;
+	
+	//재귀메서드
+	private void categoryList(CategoryEntity ca) {
+		if(ca==null)return;
+		cates.add(ca);
+		categoryList(ca.getParent());
+	}
+	
 	@Transactional
 	@Override
 	public void goodsOfCategory(long cateNo, Model model) {
 		//카테고리에 해당하는 상품들모두
-		CategoryEntity ca=cateRepo.findById(cateNo).get();
-		System.out.println("현재카테고리:"+ca.getName());
-		CategoryEntity su=ca.getParent();
-		if(su!=null) {
-			System.out.println("상위카테고리:"+su.getName());
-			su=su.getParent();
-			if(su!=null) {
-				System.out.println("상위카테고리:"+su.getName());
-				su=su.getParent();
-				if(su!=null) {
-					System.out.println("상위카테고리:"+su.getName());
-					su=su.getParent();
-				}
-			}
-		};
+		cates=new ArrayList<>();
+		categoryList(cateRepo.findById(cateNo).get());
 		
+		model.addAttribute("cates", cates);
 		
-		model.addAttribute("cate", ca);
 		model.addAttribute("list", cateItemRepo.findAllByCategoryNo(cateNo)
 				.stream()
 				.map(GoodsListDTO::new)

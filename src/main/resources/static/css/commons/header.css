@@ -172,61 +172,55 @@ header{
 
 #nb>.wrap>ul>.cate>.cate-wrap{
 	position: relative;
-	display: none;
 }
 
 #nb>.wrap>ul .cate>.cate-wrap>ol{
 	position: absolute;
-	top:-1px;
-	left:178px;
+	top: -1px;
+	left:198px;
 	z-index: 100;
 	background-color: rgba(255,255,255, 1);
-	width: 180px;
+	width: 200px;
 	border: 1px solid #a9a9a9;
 	/* height: calc(36px*4); */
-	padding: 0.5em 0;
+	padding: 8px 0;
 }
 #nb>.wrap>ul>.cate>.cate-wrap>ol{
 	top:0;
 	left:0;
 }
 
-#nb>.wrap>ul>.gnb>.sub ol li{
+#nb>.wrap>ul>.gnb ol li{
 	padding: 0.5em 2em;
 	font-size: 14px;
+	color: #777;
 	height: 36px;
 }
-#nb>.wrap>ul>.gnb>.sub ol>li:hover>a::after{
+#nb>.wrap>ul>.gnb ol li a{
+	color: #777;
+}
+#nb>.wrap>ul .cate>.cate-wrap> ol>li:hover>a{
+	color: #222;
+}
+#nb>.wrap>ul .cate>.cate-wrap> ol>li:not(.cate-4):hover>a::after{
 	display: inline-block;
 }
-#nb>.wrap>ul>.gnb>.sub ol>li>a::after{
+#nb>.wrap>ul .cate>.cate-wrap> ol>li:not(.cate-4)>a::after{
 	content: ">";
 	font-size:14px;
 	display: none;
 	box-sizing: border-box;
 }
-#nb>.wrap>ul>.gnb>.sub ol>li>a{
+#nb>.wrap>ul .cate>.cate-wrap> ol>li>a{
 	display: flex;
 	justify-content: space-between;
 	font-size: 0;
 }
-#nb>.wrap>ul>.gnb>.sub ol>li>a>*{
+#nb>.wrap>ul .cate>.cate-wrap> ol>li>a>*{
 	font-size: 14px;
 }
-#nb>.wrap>ul>.gnb>.sub ol>li:hover ul.sub-sub{
-	display: block;
-}
-#nb>.wrap>ul>.gnb>.sub ol>li ul.sub-sub{
-	position: absolute;	
-	z-index: 101;
-	top:-1px;
-	left:178px;
-	background-color: rgba(255,255,255, 1);
-	width: 180px;
-	border: 1px solid #a9a9a9;
-	display: none;
-	height: calc(36px*4);
-}
+
+
 
 
 

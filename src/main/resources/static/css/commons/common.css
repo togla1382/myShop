@@ -6,6 +6,9 @@
 .center{justify-content: center;}
 .between{justify-content: space-between;}
 .around{justify-content: space-around;}
+.end{justify-content: flex-end;}
+.start{justify-content: flex-start;}
+.row-reverse{flex-flow: row-reverse wrap}
 
 .font-zero{
 	font-size: 0;
@@ -120,6 +123,10 @@ input[type=checkbox] + label::before{
 	position: relative;
 	top:2px;
 	margin-right: 5px;
+}
+
+main>.wrap:not(.exist-title){
+	padding: 40px 0;
 }
 
 

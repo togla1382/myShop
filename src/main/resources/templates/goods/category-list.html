@@ -8,19 +8,24 @@
 <main>
 	<h1>메인컨텐츠</h1>
 	<div class="wrap view-size">
-		<div class="flex">
-			<span>
-				<a th:href="|/common/layout/categorys/${cate.no}|" th:text="${cate.name}"></a>
+		<div class="flex row-reverse end category-path" th:if="${cates}">
+			<span th:each="cate:${cates}" th:class="${'cate-name ca-'+cate.depth}">
+				<a th:href="|/common/category/${cate.no}/goods|" th:text="${cate.name}"></a>
+				<span class="seperator" th:unless="${cateStat.first}">&gt;</span>
 			</span>
-			<p class="page-tit" th:text="${cate.name}">상품 리스트</p>
+			<span>
+				<a href="/" >HOME</a>
+				<span class="seperator">&gt;</span>
+			</span>
 		</div>
+		<p th:if="${cates}" th:text="${cates[0].name}" class="page-tit"></p>
 		<ul class="grid-container">
-			<li th:each="dto:${list}">
+			<li th:each="dto:${list}" class="list-item">
 				<div>
 					<a href="#"><img height="280px" th:src="${dto.defImgUrl}"></a>
 				</div>
-				<div class="info">
-					<p>
+				<div class="item-info">
+					<p class="info-title">
 						<a href="#"><span>[[${dto.title}]]</span></a>
 					</p>
 					<div class="price">

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<ol>
+	<ol th:unless="${#lists.isEmpty(list)}">
 		<th:block th:each=" dto : ${list}">
 		<li th:value="${dto.no}"  th:class="|sub cate ${'cate-'+dto.depth}|">
 			<a th:href="|/common/category/${dto.no}/goods|" >
-				<span th:text="${dto.name}">카테고리명</span>
+				<span th:unless="${dto.name==''}" th:text="${dto.name}">카테고리명</span>
+				<span th:if="${dto.name==''}" >분류없음</span>
 			</a>
 			<div class="cate-wrap">
 			</div>
