@@ -33,4 +33,9 @@ public class CartItemEntity {
 	@ManyToOne
 	private ItemEntity item;
 
+	public CartItemEntity updateQuantity(int quantity) {
+		this.quantity += quantity;
+		return this;
+	}
+
 }
