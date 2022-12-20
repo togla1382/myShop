@@ -10,7 +10,7 @@
 	<div class="wrap view-size">
 		<div class="flex row-reverse end category-path" th:if="${cates}">
 			<span th:each="cate:${cates}" th:class="${'cate-name ca-'+cate.depth}">
-				<a th:href="|/common/category/${cate.no}/goods|" th:text="${cate.name}"></a>
+				<a th:href="|/common/category/${cate.no}/goods|" th:text="${cate.name}">카테고리이름</a>
 				<span class="seperator" th:unless="${cateStat.first}">&gt;</span>
 			</span>
 			<span>
@@ -22,11 +22,11 @@
 		<ul class="grid-container">
 			<li th:each="dto:${list}" class="list-item">
 				<div>
-					<a href="#"><img height="280px" th:src="${dto.defImgUrl}"></a>
+					<a th:href="|/common/goods/${dto.no}|"><img height="280px" th:src="${dto.defImgUrl}"></a>
 				</div>
 				<div class="item-info">
 					<p class="info-title">
-						<a href="#"><span>[[${dto.title}]]</span></a>
+						<a th:href="|/common/goods/${dto.no}|"><span>[[${dto.title}]]</span></a>
 					</p>
 					<div class="price">
 						<i>

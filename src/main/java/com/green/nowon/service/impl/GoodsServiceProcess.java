@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.green.nowon.domain.dto.goods.GoodsDetailDTO;
 import com.green.nowon.domain.dto.goods.GoodsInsertDTO;
 import com.green.nowon.domain.dto.goods.GoodsListDTO;
 import com.green.nowon.domain.entity.CategoryEntity;
@@ -37,13 +38,13 @@ public class GoodsServiceProcess implements GoodsService {
 	
 	
 	@Autowired
-	ItemEntityRepository itemRepo;
+	ItemEntityRepository itemRepo;//상품
 	@Autowired
-	CategoryItemEntityRepository cateItemRepo;
+	CategoryItemEntityRepository cateItemRepo;//카테고리_상품 연계테이블
 	@Autowired
-	ItemListImgRepository imgRepo;
+	ItemListImgRepository imgRepo;//상품이미지
 	@Autowired
-	CategoryEntityRepository cateRepo;
+	CategoryEntityRepository cateRepo;//카테고리
 	
 	List<CategoryEntity> cates;
 	
@@ -92,6 +93,16 @@ public class GoodsServiceProcess implements GoodsService {
 		
 		dto.toItemListImgs(entity, locationUpload).forEach(imgRepo::save);
 		//이미지 temp->temp->실제 upload위치
+	}
+
+	@Transactional //아이템->이미지 LAZY이므로 정보획득을위해 
+	@Override
+	public void detail(long no, Model model) {
+		model.addAttribute("detail", itemRepo.findById(no)
+				//.map(e->new GoodsDetailDTO(e))
+				.map(GoodsDetailDTO::new)
+				.orElseThrow()) ;
+		
 	}
 
 	

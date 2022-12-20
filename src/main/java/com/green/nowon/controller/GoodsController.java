@@ -20,6 +20,12 @@ public class GoodsController {
 	@Autowired
 	private GoodsService service;
 	
+	@GetMapping("/common/goods/{no}")
+	public String detail(@PathVariable long no, Model model) {
+		service.detail(no, model);
+		return "/goods/detail";
+	}
+	
 	@GetMapping("/common/category/{no}/goods")
 	public String goodsOfCategory(@PathVariable long no, Model model) {
 		service.goodsOfCategory(no, model);

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ th:replace="~{layout/comm-layout :: commLayout(~{this::head}, ~{::main})}">
+<head>
+    <!-- 해당하는 페이지의 css나 js를 아래에 적용 -->
+    <link rel="stylesheet" href="/css/goods/comm.css">
+</head>
+<main>
+	<h1>메인컨텐츠</h1>
+	<div class="wrap view-size">
+		<div class="flex row-reverse end category-path" th:if="${cates}">
+			<span th:each="cate:${cates}" th:class="${'cate-name ca-'+cate.depth}">
+				<a th:href="|/common/category/${cate.no}/goods|" th:text="${cate.name}">카테고리이름</a>
+				<span class="seperator" th:unless="${cateStat.first}">&gt;</span>
+			</span>
+			<span>
+				<a href="/" >HOME</a>
+				<span class="seperator">&gt;</span>
+			</span>
+		</div>
+		<p class="page-tit">상품 상세페이지</p>
+		<section id="detail">
+			<h1>상품상세정보</h1>
+			<div class="wrap">
+				<div class="flex">
+					<div class="img-area">
+						<div class="defImg">
+						</div>
+						<ul>
+							<li class="addImg"></li>
+						</ul>
+					</div>
+					<div class="goods-info">
+						<ul>
+							<li class="title" th:text="${detail.title}">상품명</li>
+							<li class="price" th:text="${detail.price}">일반가격</li>
+							<li class="">
+								<label>구매수량</label>
+								<div class="flex between">
+									<input type="number" value="1" >
+									<span>
+										<i>총 상품 금액</i>
+										<i>수량따른 금액표현</i>
+										<i>원</i>
+									</span>
+								</div>
+							</li>
+							<li class="flex between">
+								<div>
+									<button type="button">장바구니</button>
+									<button type="button">구매하기</button>
+								</div>
+								<div>
+									<button type="button">좋아요</button>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="content" th:utext="${detail.content}">
+					내용
+				</div>
+			</div>
+		</section>
+		
+	</div>
+</main>
+</html>

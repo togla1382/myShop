@@ -16,4 +16,6 @@ public interface GoodsService {
 
 	void goodsOfCategory(long cateNo, Model model);
 
+	void detail(long no, Model model);
+
 }
