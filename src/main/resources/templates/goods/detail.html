@@ -4,6 +4,40 @@
 <head>
     <!-- 해당하는 페이지의 css나 js를 아래에 적용 -->
     <link rel="stylesheet" href="/css/goods/comm.css">
+    <style type="text/css">
+    	.bg-img{
+    		background-repeat:no-repeat;
+    		background-position: center;
+    		background-size: contain;
+    	}
+    	#detail>.wrap{
+    		width: 1020px;
+    		margin: 0 auto;
+    	}
+    	#detail>.wrap .detail-top .img-area .defImg{
+    		width: 420px;
+    		height: 420px;
+    	}
+    	#detail>.wrap .detail-top .img-area .addImg-wrap .addImg{
+    		width: 80px;
+    		height: 80px;
+    	}
+    	#detail>.wrap .detail-top .goods-info{
+    		width: 550px;
+    	}
+    	#detail>.wrap .detail-top .goods-info ul li{
+    		margin-top: 20px;
+    	}
+    	#detail>.wrap .detail-top .goods-info ul li dl dt{
+    		width: 160px; 
+    		color: #777;
+    	}
+    	#detail>.wrap .detail-top .goods-info ul li .title{
+    		font-size: 26px;
+    		font-weight: bold;
+    		line-height: 30px;
+    	}
+    </style>
 </head>
 <main>
 	<h1>메인컨텐츠</h1>
@@ -21,33 +55,123 @@
 		<p class="page-tit">상품 상세페이지</p>
 		<section id="detail">
 			<h1>상품상세정보</h1>
-			<div class="wrap">
-				<div class="flex">
+			<div class="wrap ">
+				<div class="flex bewteen detail-top">
 					<div class="img-area">
-						<div class="defImg">
+						<div class="defImg bg-img" th:style="|background-image: url('${detail.defImgUrl}');|">
 						</div>
-						<ul>
-							<li class="addImg"></li>
+						<ul class="addImg-wrap flex">
+							<th:block th:each="idto:${detail.imgs}">
+							<li  class="addImg bg-img" th:style="|background-image: url('${idto.imgUrl}');|"></li>
+							</th:block>
 						</ul>
 					</div>
 					<div class="goods-info">
 						<ul>
-							<li class="title" th:text="${detail.title}">상품명</li>
-							<li class="price" th:text="${detail.price}">일반가격</li>
+							<li>
+								<p class="title" th:text="${detail.title}">상품명</p>
+							</li>
+							<li class="price" >
+								<dl class="flex">
+									<dt>일반가</dt>
+									<dd th:text="${#numbers.formatInteger(detail.price,0,'COMMA')}">일반가격</dd>
+								</dl>
+							</li>
+							<li class="" >
+								<dl class="flex">
+									<dt>배송구분</dt>
+									<dd th:text="${'그린택배'}">배송구분</dd>
+								</dl>
+							</li>
+							<li class="" >
+								<dl class="flex">
+									<dt>배송비</dt>
+									<dd class="flex">
+										<span th:text="${#numbers.formatInteger(3000,0,'COMMA')}">배송비</span>
+										<span>원</span>
+										<div class="flex free-poicy">
+											<span>(</span>
+											<span th:text="${#numbers.formatInteger(30000,0,'COMMA')}">무료기준금액</span>
+											<span>원 이상 무료)</span>
+										</div>
+									</dd>
+								</dl>
+							</li>
 							<li class="">
-								<label>구매수량</label>
-								<div class="flex between">
-									<input type="number" value="1" >
-									<span>
-										<i>총 상품 금액</i>
-										<i>수량따른 금액표현</i>
-										<i>원</i>
-									</span>
-								</div>
+							
+								<dl>
+									<dt>구매수량</dt>
+									<dd class="flex between">
+										<script type="text/javascript">
+										
+										
+										function quantityChanged(){
+											var tot=$("#quantity").val() * $("#price").val();
+											$("#total-price").text(addComma(tot));
+										}
+										//숫자 3자리마다 ,표현
+										function addComma(num){
+											var reg=/\B(?=(\d{3})+(?!\d))/g;
+											return num.toString().replace(reg,',');
+										}
+										
+										function btnCartClicked(){
+											
+											
+											if(!loginCheck()){
+												var result=confirm("카트저장은 로그인 이후 가능합니다.\n로그인페이지로 이동할까요?");
+												if(result){
+													location.href="/member/login";
+												}
+												return;
+											}
+											
+											//*
+											var ea=$("#quantity").val();
+											var no=$("#no").val();
+											
+											$.ajax({
+												url: "/user/cart-item",
+												data:{quantity:ea, itemNo:no},
+												type: "post",
+												success:function(){
+													//alert("정상처리");
+												},
+												error:function(){
+													//alert("문제발생");
+												}
+											});
+											//*/
+										}
+										
+										
+										function loginCheck(){
+											var isLogin=false;
+											$.ajax({
+												url:"/member/login-check",
+												async: false,
+												success:function(result){
+													isLogin=result;
+												}
+											})
+											return isLogin;
+										}
+										
+										</script>
+										<input type="hidden" id="price" th:value="${detail.price}">
+										<input type="number" id="quantity" min="1" th:max="${10}" value="1" onchange="quantityChanged()">
+										<span>
+											<i>총 상품 금액</i>
+											<i th:text="${#numbers.formatInteger(detail.price,0,'COMMA')}" id="total-price">수량따른 금액표현</i>
+											<i>원</i>
+										</span>
+									</dd>
+								</dl>
 							</li>
 							<li class="flex between">
 								<div>
-									<button type="button">장바구니</button>
+									<input type="hidden" id="no" th:value="${detail.no}">
+									<button type="button" id="btn-cart" onclick="btnCartClicked()">장바구니</button>
 									<button type="button">구매하기</button>
 								</div>
 								<div>
@@ -57,7 +181,7 @@
 						</ul>
 					</div>
 				</div>
-				<div class="content" th:utext="${detail.content}">
+				<div class="detail-content" th:utext="${detail.content}">
 					내용
 				</div>
 			</div>

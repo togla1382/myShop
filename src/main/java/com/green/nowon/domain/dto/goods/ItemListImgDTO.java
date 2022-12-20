@@ -13,7 +13,7 @@ public class ItemListImgDTO {
 	private boolean defImg;
 	
 	//편의필드
-	private String imgUri;
+	private String imgUrl;
 	
 	public ItemListImgDTO(ItemListImg e) {
 		this.no = e.getNo();
@@ -22,7 +22,7 @@ public class ItemListImgDTO {
 		this.url = e.getUrl();
 		this.defImg = e.isDefImg();
 		
-		this.imgUri=url+newName;
+		this.imgUrl=url+newName;
 	}
 	
 	

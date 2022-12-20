@@ -27,8 +27,9 @@ public class SecurityConfig {
 		http
 			.authorizeRequests(authorize -> authorize
 				.antMatchers("/css/**","/js/**","/images/**").permitAll()
-				.antMatchers("/","/member/signup","/common/**","/kafka/**").permitAll()
-				.antMatchers("/admin/**").hasAnyRole("ADMIN")
+				.antMatchers("/","/member/**","/common/**","/kafka/**").permitAll()
+				.antMatchers("/user/**").hasRole("USER")
+				.antMatchers("/admin/**").hasRole("ADMIN")
 				.anyRequest().authenticated()
 			)
 			.formLogin(formLogin->formLogin
