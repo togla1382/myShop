@@ -159,6 +159,12 @@
 											return isLogin;
 										}
 										
+										function btnOrderClicked(){
+											var quantity=$("#quantity").val();
+											var itemNo=$("#no").val();
+											
+											location.href=`/user/order?itemNo=${itemNo}&quantity=${quantity}`;
+										}
 										</script>
 										<input type="hidden" id="price" th:value="${detail.price}">
 										<input type="number" id="quantity" min="1" th:max="${10}" value="1" onchange="quantityChanged()">
@@ -174,7 +180,7 @@
 								<div>
 									<input type="hidden" id="no" th:value="${detail.no}">
 									<button type="button" id="btn-cart" onclick="btnCartClicked()">장바구니</button>
-									<button type="button">구매하기</button>
+									<button type="button" id="btn-order" onclick="btnOrderClicked()">구매하기</button>
 								</div>
 								<div>
 									<button type="button">좋아요</button>

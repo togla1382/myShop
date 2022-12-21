@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ th:replace="~{layout/comm-layout :: commLayout(~{this::head}, ~{::main})}">
+<head>
+    <!-- 해당하는 페이지의 css나 js를 아래에 적용 -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/js/daumPostcode.js"></script>
+    <link rel="stylesheet" href="/css/goods/comm.css">
+    <style type="text/css">
+    	input[type=checkbox] {
+			display: inline-block;
+		}
+    </style>
+</head>
+<main>
+	<h1>메인컨텐츠</h1>
+	<div class="wrap view-size">
+		
+		<p class="page-tit">주문/결제</p>
+		<section id="cart">
+			<h1>주문/결제</h1>
+			<div class="wrap ">
+				<div>
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<td>상품이미지</td>
+							<td>상품정보</td>
+							<td>구매수량</td>
+							<td>토탈금액</td>
+							<td>배송비</td>
+							<td>주문금액</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="dto : ${list}" >
+							<td><img alt="상품목록이미지" th:src="${dto.item.defImgUrl}" height="100px"></td>
+							<td>
+								<p th:text="${dto.item.title}">상품명</p>
+								<p th:text="${#numbers.formatInteger(dto.item.price , 0 ,'COMMA')}">단가</p>
+							</td>
+							<td th:text="${dto.quantity}">구매수량</td>
+							<td th:text="${#numbers.formatInteger(dto.totPrice , 0 ,'COMMA')}">토탈금액</td>
+							<td th:text="${#numbers.formatInteger(dto.item.dPrice , 0 ,'COMMA')}">배송비</td>
+							<td th:text="${#numbers.formatInteger(dto.totPrice + dto.item.dPrice , 0 ,'COMMA')}">주문금액</td>
+						</tr>
+					</tbody>
+				</table>
+				<section id="delivery">
+					<h1>배송지정보</h1>
+					<div class="wrap">
+						<dl>
+							<dt>배송지선택</dt>
+							<dt>
+								<span th:if="${baseDelivery}">
+									<input type="radio" name="deliveryInfo" id="base-delivery">
+									<label for="base-delivery">기본배송지</label>
+								</span>
+								<span>
+									<input type="radio" name="deliveryInfo" id="new-delivery" checked="checked" >
+									<label for="new-delivery">신규배송지</label>
+								</span>
+								<span>
+									<button type="button">배송지 목록</button>
+								</span>
+							</dt>
+						</dl>
+						<ul>
+							<li style="display: none;">기본배송지 정보</li>
+							<li>
+								<form id="form-delivery" >
+									<dl>
+										<dt>수령인</dt>
+										<dd>
+											<input type="text" name="receiverName">
+										</dd>
+									</dl>
+									<dl>
+										<dt>배송지명</dt>
+										<dd>
+											<input type="text" name="deliveryAddrName">
+										</dd>
+									</dl>
+									<dl>
+										<dt>연락처1</dt>
+										<dd>
+											<input type="text" name="phone1">
+										</dd>
+									</dl>
+									<dl>
+										<dt>연락처2</dt>
+										<dd>
+											<input type="text" name="phone2">
+										</dd>
+									</dl>
+									<dl>
+										<dt>배송지 주소</dt>
+										<dd>
+											<input type="text" id="postcode" name="postcode" placeholder="우편번호">
+											<input type="button" onclick="daumPostcode()" value="우편번호 찾기"><br>
+											<input type="text" id="roadAddress" name="roadAddress" placeholder="도로명주소">
+											<input type="text" id="jibunAddress" name="jibunAddress" placeholder="지번주소">
+											<span id="guide" style="color:#999;display:none"></span>
+											<input type="text" id="detailAddress"  name="detailAddress" placeholder="상세주소">
+											<input type="text" id="extraAddress" name="extraAddress" placeholder="참고항목">
+										</dd>
+									</dl>
+									<button type="submit">배송지 등록</button>
+								</form>
+								<dl>
+									<dt>배송메모</dt>
+									<dd>
+										<input type="text" name="memo">
+									</dd>
+								</dl>
+							</li>
+							<li style="display: none;">배송지 목록</li>
+						</ul>
+					</div>
+				</section>
+			</div>
+		</section>
+		
+	</div>
+</main>
+</html>

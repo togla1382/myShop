@@ -1,5 +1,6 @@
 package com.green.nowon.domain.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,23 +18,32 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Table(name = "order_item")
+@Table(name = "delivery")
 @Entity
-public class OrderItemEntity {
-	
+public class DeliveryEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long no;
+	@Column(unique = true)
+	private String deliveryAddrName;
 	
-	private int orderPrice;//주문금액
-	private int quantity;//주문수량
+	private String receiverName;
+	private String phone1;
+	private String phone2;
 	
-	@JoinColumn//order_no
+	private String postcode;
+	private String roadAddress;
+	private String jibunAddress;
+	private String detailAddress;
+	private String extraAddress;
+	
+	@JoinColumn//member_mno
 	@ManyToOne
-	private OrderEntity order;
+	private MemberEntity member;
 	
-	@JoinColumn//item_no
-	@ManyToOne
-	private ItemEntity item;
-	
+	public DeliveryEntity member(MemberEntity member) {
+		this.member=member;
+		return this;
+	}
+
 }

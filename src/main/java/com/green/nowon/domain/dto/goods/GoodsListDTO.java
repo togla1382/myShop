@@ -21,7 +21,8 @@ public class GoodsListDTO {
 	private int stock;
 	
 	
-	
+	private int sPrice;
+	private int dPrice;
 	//이미지 대표이미지
 	private String defImgUrl;
 
@@ -31,7 +32,8 @@ public class GoodsListDTO {
 		this.price = e.getPrice();
 		this.stock = e.getStock();
 		this.defImgUrl = e.defImg().getUrl()+e.defImg().getNewName();
-		
+		sPrice=0;
+		dPrice=3000;
 	}
 	public GoodsListDTO(CategoryItemEntity cie) {
 		this(cie.getItem());
