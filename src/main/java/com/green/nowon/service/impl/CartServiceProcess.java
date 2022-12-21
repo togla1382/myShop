@@ -1,12 +1,15 @@
 package com.green.nowon.service.impl;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
+import com.green.nowon.domain.dto.goods.CartItemListDTO;
 import com.green.nowon.domain.dto.goods.CartItemSaveDTO;
 import com.green.nowon.domain.entity.CartEntity;
 import com.green.nowon.domain.entity.CartEntityRepository;
@@ -32,6 +35,16 @@ public class CartServiceProcess implements CartService {
 	@Autowired
 	private ItemEntityRepository itemRepo;
 	
+	@Transactional//이미지 때문에 필요
+	@Override
+	public void cartItems(Model model, String email) {
+		//CartEntity cart= cartRepo.findByMemberEmail(email).get();
+		//cartItemRepo.findAllByCartNo(cart.getNo());
+		model.addAttribute("list", cartItemRepo.findAllByCartMemberEmail(email)
+				.stream()
+				.map(CartItemListDTO::new)
+				.collect(Collectors.toList()));
+	}
 	
 	@Transactional
 	@Override
@@ -75,5 +88,8 @@ public class CartServiceProcess implements CartService {
 		*/
 		
 	}
+
+
+	
 
 }

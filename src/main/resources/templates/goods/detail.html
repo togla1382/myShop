@@ -135,7 +135,9 @@
 												data:{quantity:ea, itemNo:no},
 												type: "post",
 												success:function(){
-													//alert("정상처리");
+													if(!confirm("장바구니에 상품을 담았습니다.\n장바구니 페이지로 이동할까요?"))return;
+													location.href="/user/cart-items";
+													
 												},
 												error:function(){
 													//alert("문제발생");
