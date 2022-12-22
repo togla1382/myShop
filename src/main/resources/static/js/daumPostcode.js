@@ -6,19 +6,29 @@ $(function(){
 	getBaseDelivery();
 	$("#form-delivery").submit(deliverySubmited);
 	$("#btn-delivery-list").click(btnDeliveryListClicked);
-	$("#menu-d>li").click(memuDClicked);
+	//$("#menu-d>li").click(memuDClicked);
 });
 function getBaseDelivery(){
-	$.get(
-		"/user/deliveries/base",
-		function(resultHTML){
-			
+	$.ajax({
+		url:"/user/deliveries/base",
+		success:function(resultHTML){
+			$("#base-delivery-disp").html(resultHTML);
+			$("#menu-d>li").removeClass("target");
+			$("#menu-d>li").eq(0).addClass("target");
+		},
+		error:function(){
+			memuDClicked($("#menu-d>li").eq(1));
+			alert("배송지 정보가 존재하지 않습니다.");
 		}
-	);
+	});
 }
-function memuDClicked(){
+function memuDClicked(el){
+	if($(el).index()==0){
+		getBaseDelivery();
+		return;
+	}
 	$("#menu-d>li").removeClass("target");
-	$(this).addClass("target");
+	$(el).addClass("target");
 }
 
 function btnDeliveryListClicked(){

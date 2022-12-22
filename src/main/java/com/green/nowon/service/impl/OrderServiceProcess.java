@@ -29,7 +29,16 @@ public class OrderServiceProcess implements OrderService {
 	@Autowired
 	private MemberEntityRepository memRepo;
 	
-	
+	//회원의 모든 배송지중 기본배송지
+	@Override
+	public void baseOfdeliveries(String email, Model model) {
+		model.addAttribute("base", deliveryRepo.findByBaseAndMember_email(true,email)
+				.map(DeliveryListDTO::new)
+				.orElseThrow()
+				);
+		
+	}
+	//회원의 모든 배송지
 	@Override
 	public void deliveries(String email, Model model) {
 		model.addAttribute("list", deliveryRepo.findAllByMember_email(email).stream()
@@ -52,6 +61,8 @@ public class OrderServiceProcess implements OrderService {
 				.base(deliveryRepo.countByMember_email(email)==0?true:false)//배송지정보가 없으면 base=true
 				.member(memRepo.findByEmail(email).orElseThrow()));
 	}
+
+	
 
 	
 

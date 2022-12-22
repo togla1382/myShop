@@ -13,6 +13,8 @@ public interface OrderService {
 
 	void deliveries(String email, Model model);
 
+	void baseOfdeliveries(String email, Model model);
+
 	
 
 }

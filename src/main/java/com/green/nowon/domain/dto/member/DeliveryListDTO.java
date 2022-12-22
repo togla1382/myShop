@@ -8,6 +8,7 @@ import lombok.Getter;
 @Getter
 public class DeliveryListDTO {
 	
+	private long no; 
 	private String deliveryAddrName;
 	private boolean base;
 	private String receiverName;

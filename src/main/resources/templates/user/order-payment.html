@@ -16,8 +16,6 @@
 		<section id="cart">
 			<h1>주문/결제</h1>
 			<div class="wrap ">
-				<div>
-				</div>
 				<table>
 					<thead>
 						<tr>
@@ -49,14 +47,14 @@
 						<p>배송지선택</p>
 						<ul id="menu-d" class="flex">
 							<!-- ///////////기본배송지/////////////////////// -->
-							<li class="target">
+							<li class="target" onclick="memuDClicked(this)">
 								<button type="button" id="base-delivery" >기본배송지</button>
-								<div class="disp">
-									기본배송지 정보
+								<div class="disp" id="base-delivery-disp">
+									<p>배송지 정보가 존재하지 않습니다.</p>
 								</div>
 							</li>
 							<!-- ///////////신규배송지/////////////////////// -->
-							<li>
+							<li onclick="memuDClicked(this)">
 								<button type="button" id="new-delivery">신규배송지</button>
 								<div class="disp">
 									<form id="form-delivery" >
@@ -108,7 +106,7 @@
 								</div>
 							</li>
 							<!-- ///////////배송지목록/////////////////////// -->
-							<li>
+							<li onclick="memuDClicked(this)">
 								<button type="button" id="btn-delivery-list">배송지 목록</button>
 								<div class="disp" id="deliveries">
 									
@@ -116,6 +114,11 @@
 							</li>
 						</ul>
 					</div>
+				</section>
+				<section>
+					<div class="wrap">
+						<button type="button" id="btn-pg">결제하기</button>
+					</div>	
 				</section>
 			</div>
 		</section>

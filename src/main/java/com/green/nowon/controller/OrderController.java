@@ -39,6 +39,13 @@ public class OrderController {
 		return "user/deliveries";
 	}
 	
+	//@ResponseBody 표기하지 않은 ajax요청입니다. response결과로 HTML페이지
+		@GetMapping("/user/deliveries/base")
+		public String baseOfdeliveries(@AuthenticationPrincipal MyUserDetails userDetails, Model model) {
+			service.baseOfdeliveries(userDetails.getEmail(), model);
+			return "user/deliveries-base";
+		}
+	
 	
 
 }

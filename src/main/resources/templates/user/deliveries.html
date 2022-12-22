@@ -6,6 +6,9 @@
 		<li>연락처</li>
 		<li>선택</li>
 	</ol>
+	<div th:if="${#lists.isEmpty(list)}">
+		배송지 정보가 존재하지 않습니다.
+	</div>
 	<ol class="flex" th:each="dto :${list}">
 		<li>
 			<p th:text="${dto.deliveryAddrName}">배송지이름</p>			
