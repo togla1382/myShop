@@ -5,7 +5,7 @@ import com.green.nowon.domain.entity.DeliveryEntity;
 import lombok.Setter;
 import lombok.ToString;
 
-@ToString
+
 @Setter
 public class DeliveryInfoDTO {
 	

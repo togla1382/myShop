@@ -24,7 +24,9 @@ public class DeliveryEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long no;
-	@Column(unique = true)
+	
+	private boolean base;//기본배송지여부
+	
 	private String deliveryAddrName;
 	
 	private String receiverName;
@@ -43,6 +45,11 @@ public class DeliveryEntity {
 	
 	public DeliveryEntity member(MemberEntity member) {
 		this.member=member;
+		return this;
+	}
+
+	public DeliveryEntity base(boolean base) {
+		this.base=base;
 		return this;
 	}
 

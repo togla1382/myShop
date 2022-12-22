@@ -32,6 +32,12 @@ public class OrderController {
 		return "user/order-payment";
 	}
 	
+	//@ResponseBody 표기하지 않은 ajax요청입니다. response결과로 HTML페이지
+	@GetMapping("/user/deliveries")
+	public String deliveries(@AuthenticationPrincipal MyUserDetails userDetails, Model model) {
+		service.deliveries(userDetails.getEmail(), model);
+		return "user/deliveries";
+	}
 	
 	
 

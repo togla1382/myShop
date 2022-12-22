@@ -11,6 +11,8 @@ public interface OrderService {
 
 	void deliveryInfoSave(DeliveryInfoDTO dto, String email);
 
+	void deliveries(String email, Model model);
+
 	
 
 }

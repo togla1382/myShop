@@ -51,6 +51,15 @@
 	border: 1px solid #a9a9a9;
 	border-radius: 10px;
 }
+.btn{
+	border: 1px solid #27c700;
+	background-color: #fff;
+	cursor: pointer;
+	color: #27c700;
+}
+.padding-h-1{
+	padding: 0.5em 1em;
+}
 
 .delivery-shop{
 	display:inline-block;

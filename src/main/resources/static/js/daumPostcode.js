@@ -3,8 +3,32 @@
  */
  
 $(function(){
+	getBaseDelivery();
 	$("#form-delivery").submit(deliverySubmited);
+	$("#btn-delivery-list").click(btnDeliveryListClicked);
+	$("#menu-d>li").click(memuDClicked);
 });
+function getBaseDelivery(){
+	$.get(
+		"/user/deliveries/base",
+		function(resultHTML){
+			
+		}
+	);
+}
+function memuDClicked(){
+	$("#menu-d>li").removeClass("target");
+	$(this).addClass("target");
+}
+
+function btnDeliveryListClicked(){
+	$.get(
+		"/user/deliveries",
+		function(resultHTML){
+			$("#deliveries").html(resultHTML);
+		}
+	);
+}
  
 function deliverySubmited(event){
 	event.preventDefault();//submit 처리시 새로고침 방지
