@@ -34,6 +34,8 @@ public class OrderEntity extends BaseDateEntity{
 	@Enumerated(EnumType.STRING)
 	private OrderStaus status;//주문상태
 	
+	private String paymentNo;//merchant_uid
+	
 	@JoinColumn//member_mno
 	@ManyToOne
 	private MemberEntity member; //주문자정보

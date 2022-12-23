@@ -1,7 +1,7 @@
 plugins {
 	id 'java'
 	id 'war'
-	id 'org.springframework.boot' version '2.7.6'
+	id 'org.springframework.boot' version '2.7.7'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
@@ -21,8 +21,7 @@ repositories {
 }
 
 dependencies {
-	//implementation 'com.github.User:Repo:Tag'
-	//implementation 'org.springframework.kafka:spring-kafka'
+	implementation 'com.github.iamport:iamport-rest-client-java:0.2.22'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	implementation 'org.springframework.boot:spring-boot-starter-security'

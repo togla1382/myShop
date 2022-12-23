@@ -1,9 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
  th:replace="~{layout/comm-layout :: commLayout(~{this::head}, ~{::main})}">
 <head>
     <!-- 해당하는 페이지의 css나 js를 아래에 적용 -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <!-- jQuery -->
+	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script> -->
+	<!-- iamport.payment.js -->
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	<script type="text/javascript">
+	  const IMP = window.IMP; // 생략 가능
+	  IMP.init("imp82867051"); // 예: imp00000000a
+	  
+	  
+	  function btnPgClicked(){
+		  //1.페이지에서 결제정보 수집하는 방법 : 구매자 정보,상품정보,배송
+		
+		var checkedItems=$(".cb:checked");
+		//.siblings(".item-no");
+		
+		var title=$(checkedItems[0]).siblings(".title").val();
+		if(checkedItems.length>1){
+			title +=" 외 "+(checkedItems.length-1)+"건";
+		}					
+		//var quantity;
+		var payPrice=0;
+		console.log("length: "+checkedItems.length);
+		
+	  	$.each(checkedItems, function(index, item){
+	  		payPrice += parseInt($(item).siblings(".payPrice").val());
+	  	});
+	  	
+	  	var data={
+	  		merchant_uid: "ORD_"+new Date().getTime(),
+	  		name: title,
+	  		amount: payPrice,
+	  		buyer_email: $("#user-email").val(),
+	  		buyer_name: $("#user-name").val(),
+	  		buyer_tel: "",
+			buyer_addr: "",
+			buyer_postcode: ""
+	  	};
+	  	requestPay(data);
+	  }
+	  
+	  //iamport 결제창 띄우기
+	  function requestPay(data) {
+		    IMP.request_pay({
+		      pg: "html5_inicis",
+		      pay_method: "card",
+		      merchant_uid: data.merchant_uid,   // 주문번호
+		      name: data.name,
+		      amount: data.amount,                         // 숫자 타입
+		      buyer_email: data.buyer_email,
+		      buyer_name: data.buyer_name,
+		      buyer_tel: data.buyer_tel,
+		      buyer_addr: data.buyer_addr,
+		      buyer_postcode: data.buyer_postcode
+		    }, function (rsp) { // callback
+		      if (rsp.success) {
+		        // 결제 성공 시 로직
+		        //DB에반영할 데이터 처리
+		        alert("결제가 완료되었습니다.");
+		        
+		      } else {
+		    	alert("결제실패!");
+		      }
+		    	
+		    });
+		  }
+	</script>
     <script src="/js/daumPostcode.js"></script>
     <link rel="stylesheet" href="/css/goods/comm.css">
     <link rel="stylesheet" href="/css/user/order-payment.css">
@@ -19,6 +86,7 @@
 				<table>
 					<thead>
 						<tr>
+							<td>선택</td>
 							<td>상품이미지</td>
 							<td>상품정보</td>
 							<td>구매수량</td>
@@ -28,7 +96,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="dto : ${list}" >
+						<tr class="item-info"  th:each="dto : ${list}" >
+							<td>
+								<input type="checkbox" class="cb"  checked="checked">
+								<input type="hidden" readonly="readonly" class="item-no"  th:value="${dto.item.no}" >
+								<input type="hidden" readonly="readonly" class="quantity"  th:value="${dto.quantity}" >
+								<input type="hidden" readonly="readonly" class="title"  th:value="${dto.item.title}" >
+								<input type="hidden" readonly="readonly" class="payPrice"  th:value="${dto.totPrice + dto.item.dPrice}" >
+							</td>
 							<td><img alt="상품목록이미지" th:src="${dto.item.defImgUrl}" height="100px"></td>
 							<td>
 								<p th:text="${dto.item.title}">상품명</p>
@@ -116,8 +191,10 @@
 					</div>
 				</section>
 				<section>
-					<div class="wrap">
-						<button type="button" id="btn-pg">결제하기</button>
+					<div class="wrap" sec:authorize="isAuthenticated()">
+						<input type="hidden" id="user-email" th:value="${#authentication.name}" readonly="readonly">
+						<input type="hidden" id="user-name" th:value="${#authentication.principal.name}" readonly="readonly">
+						<button type="button" id="btn-pg" onclick="btnPgClicked()">결제하기</button>
 					</div>	
 				</section>
 			</div>
