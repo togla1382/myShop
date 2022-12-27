@@ -13,6 +13,8 @@ function getBaseDelivery(){
 		url:"/user/deliveries/base",
 		success:function(resultHTML){
 			$("#base-delivery-disp").html(resultHTML);
+			
+			$("#delivery-no").val($("#baseDeliveryNo").val());
 			$("#menu-d>li").removeClass("target");
 			$("#menu-d>li").eq(0).addClass("target");
 		},
@@ -47,9 +49,13 @@ function deliverySubmited(event){
 	$.ajax({
 		url:"/user/delivery",
 		type:"post",
+		async:false,
 		data: queryString,
-		success:function(){
-			alert("등록완료");
+		success:function(result){
+			//alert("등록완료");
+			$("#delivery-no").val(result);
+			console.log("배송지 정보 등록 완료!")
+			
 		}
 	});
 	

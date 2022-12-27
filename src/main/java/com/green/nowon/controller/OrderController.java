@@ -6,10 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.nowon.domain.dto.goods.OrderItemDTO;
 import com.green.nowon.domain.dto.member.DeliveryInfoDTO;
+import com.green.nowon.domain.dto.member.OrderInsertDTO;
 import com.green.nowon.security.MyUserDetails;
 import com.green.nowon.service.OrderService;
 
@@ -22,14 +24,21 @@ public class OrderController {
 	
 	@ResponseBody
 	@PostMapping("/user/delivery")
-	public void deliveryInfo(DeliveryInfoDTO dto, @AuthenticationPrincipal MyUserDetails userDetails) {
-		service.deliveryInfoSave(dto, userDetails.getEmail());
+	public long deliveryInfo(DeliveryInfoDTO dto, @AuthenticationPrincipal MyUserDetails userDetails) {
+		return service.deliveryInfoSave(dto, userDetails.getEmail());
 	}
 	
 	@GetMapping("/user/order")
 	public String orderPayment(OrderItemDTO dto, Model model) {
 		service.orderItem(dto, model);
 		return "user/order-payment";
+	}
+	
+	@ResponseBody
+	@PostMapping("/user/order")
+	public void orderSave(@RequestBody OrderInsertDTO dto, @AuthenticationPrincipal MyUserDetails userDetails) {
+		System.out.println(">>>>> OrderInsertDTO:"+ dto);
+		service.save(dto, userDetails.getEmail());
 	}
 	
 	//@ResponseBody 표기하지 않은 ajax요청입니다. response결과로 HTML페이지

@@ -13,6 +13,54 @@
 	  const IMP = window.IMP; // 생략 가능
 	  IMP.init("imp82867051"); // 예: imp00000000a
 	  
+	  var merchant_uid;
+	  
+	  //결제완료된 이후 실행
+	  function pmDone(){
+		  //결제 상품정보
+		  var orderItems=[];
+		  var checkedItems=$(".cb:checked");
+		  $.each(checkedItems, function(index, item){
+			  var orderItem={
+				  itemNo: $(item).siblings(".item-no").val(),//결제할 아이템의 pk
+				  quantity:$(item).siblings(".quantity").val()//결제할 아이템의 개수
+			  }
+			 orderItems.push(orderItem);
+	  	  });
+		  //결제번호: 전역변수에 저장되어있음
+		  
+		  var liIdx=$("#menu-d>li.target").index();
+		  if(liIdx==1){
+			  $("#form-delivery").submit();
+		  }
+		  //배송정보
+		  // - 기본배송지 정보
+		  // - 신규배송지 정보
+		  //$("#form-delivery").submit()
+		  console.log("배송지 정보 등록 확인!")
+		  var deliveryNo=$("#delivery-no").val();
+		  // $("#form-delivery").submit() 처리가 완료되야
+		  // $("#delivery-no").val() 데이터를 읽어올수 있어요
+		  var data={
+				 	  orderItems: orderItems,
+					  paymentNo: merchant_uid,
+					  deliveryNo: deliveryNo
+				  }
+				  
+			//json탑입데이터를 컨트롤러로 매핑하기위해
+		  $.ajax({
+			  url:"/user/order",
+			  type:"post",
+			  dataType:"json",
+			  contentType: "application/json;charset=UTF-8",
+			  data: JSON.stringify(data),
+			  success: function(){
+				  
+			  }
+		  });
+		  
+		  
+	  }
 	  
 	  function btnPgClicked(){
 		  //1.페이지에서 결제정보 수집하는 방법 : 구매자 정보,상품정보,배송
@@ -31,9 +79,12 @@
 	  	$.each(checkedItems, function(index, item){
 	  		payPrice += parseInt($(item).siblings(".payPrice").val());
 	  	});
+	  	merchant_uid="ORD_"+new Date().getTime();
+	  	
+	  	
 	  	
 	  	var data={
-	  		merchant_uid: "ORD_"+new Date().getTime(),
+	  		merchant_uid: merchant_uid,
 	  		name: title,
 	  		amount: payPrice,
 	  		buyer_email: $("#user-email").val(),
@@ -50,9 +101,9 @@
 		    IMP.request_pay({
 		      pg: "html5_inicis",
 		      pay_method: "card",
-		      merchant_uid: data.merchant_uid,   // 주문번호
-		      name: data.name,
-		      amount: data.amount,                         // 숫자 타입
+		      merchant_uid: data.merchant_uid,   // 결제번호(중복불가)
+		      name: data.name,					 // 상품명
+		      amount: data.amount,               // 결제금액
 		      buyer_email: data.buyer_email,
 		      buyer_name: data.buyer_name,
 		      buyer_tel: data.buyer_tel,
@@ -63,6 +114,7 @@
 		        // 결제 성공 시 로직
 		        //DB에반영할 데이터 처리
 		        alert("결제가 완료되었습니다.");
+		        pmDone();       
 		        
 		      } else {
 		    	alert("결제실패!");
@@ -169,7 +221,7 @@
 												<input type="text" id="extraAddress" name="extraAddress" placeholder="참고항목">
 											</dd>
 										</dl>
-										<button type="submit">배송지 등록</button>
+										<!--<button type="submit">배송지 등록</button>-->
 									</form>
 									<!-- /////////////////////// -->
 									<dl>
@@ -192,6 +244,7 @@
 				</section>
 				<section>
 					<div class="wrap" sec:authorize="isAuthenticated()">
+						<input type="hidden" id="delivery-no" >
 						<input type="hidden" id="user-email" th:value="${#authentication.name}" readonly="readonly">
 						<input type="hidden" id="user-name" th:value="${#authentication.principal.name}" readonly="readonly">
 						<button type="button" id="btn-pg" onclick="btnPgClicked()">결제하기</button>

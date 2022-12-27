@@ -10,7 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,6 +32,7 @@ public class OrderEntity extends BaseDateEntity{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long no;//주문번호
 	
+	@CreationTimestamp
 	private LocalDateTime orderedDate;//주문일
 	
 	@Enumerated(EnumType.STRING)
@@ -39,5 +43,9 @@ public class OrderEntity extends BaseDateEntity{
 	@JoinColumn//member_mno
 	@ManyToOne
 	private MemberEntity member; //주문자정보
+	
+	@JoinColumn
+	@OneToOne
+	private DeliveryEntity delivery;
 
 }

@@ -22,6 +22,7 @@ public class DeliveryListDTO {
 	private String extraAddress;
 	
 	public DeliveryListDTO(DeliveryEntity e) {
+		this.no=e.getNo();
 		this.deliveryAddrName = e.getDeliveryAddrName();
 		this.base = e.isBase();
 		this.receiverName = e.getReceiverName();
