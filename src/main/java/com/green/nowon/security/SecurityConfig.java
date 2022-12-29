@@ -26,7 +26,7 @@ public class SecurityConfig {
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests(authorize -> authorize
-				.antMatchers("/css/**","/js/**","/images/**","/webjars/**").permitAll()
+				.antMatchers("/css/**","/js/**","/images/**","/webjars/**","/files/**").permitAll()
 				.antMatchers("/","/member/**","/common/**","/kafka/**","/my-websocket/**").permitAll()
 				.antMatchers("/user/**").hasRole("USER")
 				.antMatchers("/admin/**").hasRole("ADMIN")

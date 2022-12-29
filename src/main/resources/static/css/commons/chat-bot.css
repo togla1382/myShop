@@ -19,13 +19,31 @@
 	padding: 15px;
 	line-height: 1.8em;
 	overflow-y: auto;
+	max-height: 640px;
 }
-.chat-header{
+#chat-header{
+	position:relative;
 	text-align: center;
 	background-color: #323540;
 	color: #fff;
 	height: 60px;
 	line-height: 60px;
+}
+#chat-header .btn-wrap{
+	position: absolute;
+	display:block;
+	width: 30px;
+	height: 30px;
+	top:15px;
+	right:15px;
+	line-height: 30px;
+}
+#chat-header .btn-wrap button{
+	width: 100%;
+	height: 100%;
+}
+#chat-disp{
+	position: relative;
 }
 #chat-disp .msg{
 	margin-bottom: 15px;
@@ -57,6 +75,44 @@
 	text-align: center;
 	background-color:  rgb(0 255 255 / 5%);
 	border: 1px solid #e5e5e5;
+}
+#chat-question{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding: 10px 15px;
+	font-size: 16px;
+	height: 60px;
+	background-color: #fff;
+}
+#chat-question #question{
+	border: none;
+	background-color: #e9e9e9;
+	border-radius: 18px;
+	height: 36px;
+	vertical-align: middle;
+	width: calc(100% - 80px);
+	padding: 0 1em;
+}
+#chat-question span{
+	width: 40px;
+	height: 100%; 
+}
+#chat-question span i{
+	display: block;
+	margin-top:-2px;
+	width: 30px;
+	height: 30px;
+	background-image: url("/images/icon/circle-question-solid.svg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;  
+}
+#chat-question button{
+	width: 40px;
+	border: 1px solid #e9e9e9;
+	background-color:  rgb(0 255 255 / 5%);
+	cursor: pointer;
 }
 
 
