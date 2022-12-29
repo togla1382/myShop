@@ -20,6 +20,7 @@ public class NlpKomoranService {
 	private String USER_DIC_PATH="/files/";
 	
 	private Komoran komoran;
+	
 	public NlpKomoranService(){
 		komoran = new Komoran(DEFAULT_MODEL.LIGHT);
 		ClassPathResource cpr=new ClassPathResource("static"+USER_DIC_PATH);
@@ -35,7 +36,7 @@ public class NlpKomoranService {
 				
 	    KomoranResult analyzeResultList = komoran.analyze(strToAnalyze);
 
-	    System.out.println(analyzeResultList.getPlainText());
+	    //System.out.println(analyzeResultList.getPlainText());
 
 	    List<Token> tokenList = analyzeResultList.getTokenList();
 	    for (Token token : tokenList) {
