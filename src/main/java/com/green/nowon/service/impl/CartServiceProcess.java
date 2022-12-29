@@ -62,7 +62,8 @@ public class CartServiceProcess implements CartService {
 		//System.out.println(">>>>>>>카드가 존재하지않으면 카드생성 됨.");
 		
 		
-		cartItemRepo.findByCartNoAndItemNo(cart.getNo(), dto.getItemNo()).ifPresentOrElse(
+		cartItemRepo.findByCartNoAndItemNo(cart.getNo(), dto.getItemNo())
+					.ifPresentOrElse(
 					//존재하면 구매수량 증가
 					e->e.updateQuantity(dto.getQuantity()),
 					//존재하지 않으면 저장
