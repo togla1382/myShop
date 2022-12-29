@@ -8,7 +8,12 @@
 	<link rel="stylesheet" href="/css/commons/common.css">
     <link rel="stylesheet" href="/css/commons/header.css">
 	<link rel="stylesheet" href="/css/commons/footer.css">
+	<link rel="stylesheet" href="/css/commons/chat-bot.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>-->
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/js/chat.js"></script>
     <!-- 추가head 소스가 삽입되는 지점입니다. -->
     <th:block th:replace="${head}"/>
     <script type="text/javascript">
@@ -169,6 +174,13 @@
 				</div>
 			</nav>
 		</div>
+		<aside id="chat-bot">
+			<h1>챗봇</h1>
+			<div class="wrap">
+				<button type="button" onclick="openChat(this)">문의하기</button>
+				<th:block th:insert="~{common/chat-bot::#chat-disp}" />
+			</div>
+		</aside>
 	</header>
 	
 	<!-- 메인영역이 삽입되는 지점입니다. -->

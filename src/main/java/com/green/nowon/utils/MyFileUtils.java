@@ -19,7 +19,7 @@ public class MyFileUtils {
 				File file=new File(cpr.getFile(), name);
 				file.renameTo(new File(cpr.getFile().getParent(), name));
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 			
 		}
