@@ -36,7 +36,6 @@ public class NlpKomoranService {
 				
 	    KomoranResult analyzeResultList = komoran.analyze(strToAnalyze);
 
-	    //System.out.println(analyzeResultList.getPlainText());
 
 	    List<Token> tokenList = analyzeResultList.getTokenList();
 	    for (Token token : tokenList) {
