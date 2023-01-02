@@ -2,10 +2,15 @@ package com.green.nowon.message;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
+
+import com.green.nowon.domain.entity.ChatBotIntention;
+import com.green.nowon.domain.entity.ChatBotIntentionRepository;
 
 import kr.co.shineware.nlp.komoran.constant.DEFAULT_MODEL;
 import kr.co.shineware.nlp.komoran.core.Komoran;
@@ -31,16 +36,36 @@ public class NlpKomoranService {
 		}
 	}
 	
-	public void nlpAnalyze(String strToAnalyze) throws IOException {
+	@Autowired
+	private ChatBotIntentionRepository repo;
+	
+	public String nlpAnalyze(String strToAnalyze) throws IOException {
 		
 				
 	    KomoranResult analyzeResultList = komoran.analyze(strToAnalyze);
 
 
-	    List<Token> tokenList = analyzeResultList.getTokenList();
-	    for (Token token : tokenList) {
-	        System.out.format("(%2d, %2d) %s/%s\n", token.getBeginIndex(), token.getEndIndex(), token.getMorph(), token.getPos());
+	    List<String> tokenList = analyzeResultList.getNouns();
+	    String answer=repo.findByNameAndParentNull("기타").get().getAnswer();
+	    //System.out.println(answer);
+	    
+	    for (String noun : tokenList) {
+	    	
+	    	//1차의도파악
+	    	List<ChatBotIntention> re=repo.findByParent(repo.findByNameAndParentNull(noun).orElse(null));
+	    	
+	    	if(re!=null) {
+	    		//2차의도파악
+	    		for(ChatBotIntention e:re) {
+	    			for(String noun2 : tokenList) {
+	    				System.out.println(e.getName()+":"+noun2);
+	    				if(e.getName().equals(noun2))answer=e.getAnswer();
+	    			}
+	    		}
+	    	}
+	    	
 	    }
+	    return answer;
 		
 	}
 
