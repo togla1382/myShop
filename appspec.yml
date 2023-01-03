@@ -3,7 +3,7 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/src/deploy
-    overwrite: yes
+    overwrite: true
 permissions:
   - object: /
     pattern: "**"
