@@ -39,7 +39,7 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@v2.3.3
+      uses: gradle/gradle-build-action@v2
       with:
         arguments: build
     # AWS 인증 (IAM 사용자 Access Key, Secret Key 활용)
