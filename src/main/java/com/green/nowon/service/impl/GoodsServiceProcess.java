@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.green.nowon.domain.dto.goods.GoodsDetailDTO;
 import com.green.nowon.domain.dto.goods.GoodsInsertDTO;
 import com.green.nowon.domain.dto.goods.GoodsListDTO;
@@ -25,6 +26,7 @@ import com.green.nowon.domain.entity.ItemEntityRepository;
 import com.green.nowon.domain.entity.ItemListImg;
 import com.green.nowon.domain.entity.ItemListImgRepository;
 import com.green.nowon.service.GoodsService;
+import com.green.nowon.utils.AmazonS3ResourceUtil;
 import com.green.nowon.utils.MyFileUtils;
 
 @Service
@@ -70,8 +72,14 @@ public class GoodsServiceProcess implements GoodsService {
 				.collect(Collectors.toList()));
 	}
 	
+	
+	@Autowired
+	AmazonS3ResourceUtil amazonS3ResourceUtil;
+	
 	@Override
 	public Map<String,String> fileTempUpload(MultipartFile gimg) {
+		
+		amazonS3ResourceUtil.store(gimg);
 		
 		return MyFileUtils.fileUpload(gimg, locationTemp);
 	}
