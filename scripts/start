@@ -1,12 +1,13 @@
 #!/bin/bash
 
 TOMCAT_ROOT="/home/ec2-user/src/webapp"
+DEPLOY_PATH="/home/ec2-user/src/deploy"
 DEPLOY_LOG="$TOMCAT_ROOT/deploy.log"
 DATE=`date +"[%Y-%m-%d %H:%M:%S]"`
 
 #배포된 war파일을 tomcat_web_root 경로에 앞축해제
-cp -f /home/ec2-user/src/deploy/build/libs/myShop.war  /home/ec2-user/src/webapp/
-cd /home/ec2-user/src/webapp/
+cp -f $DEPLOY_PATH/build/libs/myShop.war  $TOMCAT_ROOT
+cd $TOMCAT_ROOT
 jar -xf myShop.war
 echo "$DATE : WAR파일을 webapp 경로에 압축해제 완료!" >> $DEPLOY_LOG
 

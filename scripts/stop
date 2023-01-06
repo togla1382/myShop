@@ -1,6 +1,5 @@
 #!/bin/bash
 
-TOMCAT_ROOT="/home/ec2-user/src/webapp"
 DEPLOY_LOG="$TOMCAT_ROOT/deploy.log"
 DATE=`date +"[%Y-%m-%d %H:%M:%S]"`
 
