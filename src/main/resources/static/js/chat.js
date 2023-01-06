@@ -34,7 +34,7 @@ function disconnect() {
 }
 //버튼클릭시 접속
 function connect() {
-    var socket = new SockJS('/my-websocket', null, {transports: ["xhr-streaming", "xhr-polling"]});
+    var socket = new SockJS('/my-websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         
