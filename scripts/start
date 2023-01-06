@@ -7,7 +7,7 @@ DATE=`date +"[%Y-%m-%d %H:%M:%S]"`
 #배포된 war파일을 tomcat_web_root 경로에 앞축해제
 cp -f /home/ec2-user/src/deploy/build/libs/myShop.war  /home/ec2-user/src/webapp/
 cd /home/ec2-user/src/webapp/
-jar -vf myShop.war
+jar -xf myShop.war
 echo "$DATE : WAR파일을 webapp 경로에 압축해제 완료!" >> $DEPLOY_LOG
 
 #톰캣 시작
