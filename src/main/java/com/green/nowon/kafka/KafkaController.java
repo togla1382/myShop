@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-//@RestController
+@RestController
 public class KafkaController {
 	
 	private final KafkaProducer producter;

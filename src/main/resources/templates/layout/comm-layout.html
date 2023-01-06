@@ -79,10 +79,10 @@
 						<h1>유저메뉴</h1>
 						<div class="wrap">
 							<ul class="flex">
-								<li sec:authorize="isAnonymous()">
+								<li sec:authorize="isAnonymous()" class="flex">
 									<a href="/member/login">로그인</a>
 									<a href="/member/signup">회원가입</a>
-									<a href="/common/chat">메세지</a>
+									<form action="/kafka" method="post"><button type="submit"카프카</button></form>
 								</li>
 								<li sec:authorize="isAuthenticated()">
 									<!-- <span th:text="${#authentication.name+'(이름)'}">유저네임정보</span> -->
