@@ -1,15 +1,33 @@
 #!/bin/bash
-# my-script
-mv ./build/libs/*.war ~/src/webapp/
-cd ~/src/webapp/
-rm -r META-INF/
-rm -r WEB-INF/
-jar -xf *.war
-rm -r myShop.war
-/usr/local/apache-tomcat-9.0.70/bin/shutdown.sh
-/usr/local/apache-tomcat-9.0.70/bin/startup.sh
 
-exit 0
+TOMCAT_ROOT="/home/ec2-user/src/webapp"
+DEPLOY_LOG="$TOMCAT_ROOT/deploy.log"
+DATE=`date +"[%Y-%m-%d %H:%M:%S]"`
+
+#tomcat PID 확인
+TOMCAT_PID=`ps -ef | grep tomcat | grep -v grep | awk '{print $2}'`
+#tomcat process count
+TOMCAT_CNT=`ps -ef | grep tomcat | grep -v grep | wc -l`
+
+if [ $TOMCAT_CNT -gt 0 ]
+then
+        #tomcat 종료
+        sudo kill -9 $TOMCAT_PID
+        echo "$DATE : TOMCAT을 종료합니다. - (PID : $TOMCAT_PID)" >> $DEPLOY_LOG
+else
+        echo "$DATE : 실행중인 TOMCAT이없습니다. " >> $DEPLOY_LOG
+fi
+
+#배포된 war파일을 tomcat_web_root 경로에 앞축해제
+unzip -oqq ~/src/deploy/build/libs/myShop.war  -d ~/src/webapp/
+echo "$DATE : WAR파일을 webapp 경로에 압축해제 완료!" >> $DEPLOY_LOG
+
+#톰캣 시작
+/usr/local/apache-tomcat-9.0.70/bin/startup.sh
+echo "$DATE : TOMCAT을 시작합니다." >> $DEPLOY_LOG
+echo "###################################################" >> $DEPLOY_LOG
+
+
 
 
 

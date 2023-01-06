@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org">
 	<ol th:unless="${#lists.isEmpty(list)}">
 		<th:block th:each=" dto : ${list}">
 		<li th:value="${dto.no}"  th:class="|sub cate ${'cate-'+dto.depth}|">

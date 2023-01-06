@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @Component
 public class AmazonS3ResourceUtil {
 	
-	@Value("${cloud.aws.s3.bucket}")
+	@Value("${cloud.aws.s3.fileupload.bucket}")
 	private String bucket;
 	private String tempPath="goods/temp/";
 	private String uploadPath="goods/";
