@@ -4,20 +4,6 @@ TOMCAT_ROOT="/home/ec2-user/src/webapp"
 DEPLOY_LOG="$TOMCAT_ROOT/deploy.log"
 DATE=`date +"[%Y-%m-%d %H:%M:%S]"`
 
-#tomcat PID 확인
-TOMCAT_PID=`ps -ef | grep tomcat | grep -v grep | awk '{print $2}'`
-#tomcat process count
-TOMCAT_CNT=`ps -ef | grep tomcat | grep -v grep | wc -l`
-
-if [ $TOMCAT_CNT -gt 0 ]
-then
-        #tomcat 종료
-        sudo kill -9 $TOMCAT_PID
-        echo "$DATE : TOMCAT을 종료합니다. - (PID : $TOMCAT_PID)" >> $DEPLOY_LOG
-else
-        echo "$DATE : 실행중인 TOMCAT이없습니다. " >> $DEPLOY_LOG
-fi
-
 #배포된 war파일을 tomcat_web_root 경로에 앞축해제
 cp -f /home/ec2-user/src/deploy/build/libs/myShop.war  /home/ec2-user/src/webapp/
 cd /home/ec2-user/src/webapp/
