@@ -46,27 +46,34 @@ public class NlpKomoranService {
 
 
 	    List<String> tokenList = analyzeResultList.getNouns();
-	    String answer=repo.findByNameAndParentNull("기타").get().getAnswer();
-	    //System.out.println(answer);
+	    String answer=analyzeToken(tokenList);
 	    
-	    for (String noun : tokenList) {
-	    	
-	    	//1차의도파악
-	    	List<ChatBotIntention> re=repo.findByParent(repo.findByNameAndParentNull(noun).orElse(null));
-	    	
-	    	if(re!=null) {
-	    		//2차의도파악
-	    		for(ChatBotIntention e:re) {
-	    			for(String noun2 : tokenList) {
-	    				System.out.println(e.getName()+":"+noun2);
-	    				if(e.getName().equals(noun2))answer=e.getAnswer();
-	    			}
-	    		}
-	    	}
-	    	
-	    }
 	    return answer;
 		
+	}
+	public String  analyzeToken(List<String> tokenList) {
+		for (String token : tokenList) {	    	
+	    	//단어별 1차의도파악
+	    	if(decisionTree(token)==null)continue;//다음 단어 확인
+	    	
+	    	//1차의도에 존재하는 하위의도들
+		    for(ChatBotIntention second :repo.findAllByParent_name(token)) {
+				//하위의도명과 일치하는 토큰이 있는지 확인
+		    	for(String token2 : tokenList) {
+		    		if(second.getName().equals(token2)) {
+		    			//결정완료!
+		    			return second.getAnswer();//일치하는 답변
+		    		}
+		    	}
+			}
+	    }
+		return repo.findByNameAndParentNull("기타").get().getAnswer();
+	}
+	
+	//1차의도
+	public ChatBotIntention decisionTree(String noun) {
+		ChatBotIntention intention=repo.findByNameAndParentNull(noun).orElse(null);
+		return intention;
 	}
 
 	

@@ -22,7 +22,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		//js: var socket = new SockJS('/my-websocket');
 		registry.addEndpoint("/my-websocket")
-				.setAllowedOrigins("*")
+				//.setAllowedOrigins("*")
 				.withSockJS();//uri->authorizeRequests 등록
 	}
 

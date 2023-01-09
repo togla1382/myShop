@@ -9,7 +9,8 @@ public interface ChatBotIntentionRepository extends JpaRepository<ChatBotIntenti
 
 	Optional<ChatBotIntention> findByName(String string);
 	List<ChatBotIntention> findByParent(ChatBotIntention entity);
-	List<ChatBotIntention> findByParent_no(long parentNo);
+	List<ChatBotIntention> findAllByParent_name(String parentName);
+	List<ChatBotIntention> findAllByParent_no(Long parentno);
 	Optional<ChatBotIntention> findByNameAndParentNull(String noun);
 
 }
