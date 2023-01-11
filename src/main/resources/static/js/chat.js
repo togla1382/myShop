@@ -75,9 +75,11 @@ function inputTagString(text){
 //메뉴클릭시 메뉴 텍스트 화면에 표현 
 function menuclicked(el){
 	var text=$(el).text().trim();
+	var fToken=$(el).siblings(".f-token").val();
+	console.log("-----> fToken:"+fToken+"----");
 	var message=inputTagString(text);
 	showMessage(message);
-	stompClient.send("/app/message", {}, JSON.stringify({'content': text}));
+	stompClient.send("/app/message", {}, JSON.stringify({'content': text,'token':fToken}));
 }
 
 //엔터가 입력이되면 질문을 텍스트 화면에 표현 

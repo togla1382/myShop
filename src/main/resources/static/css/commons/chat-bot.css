@@ -114,5 +114,10 @@
 	background-color:  rgb(0 255 255 / 5%);
 	cursor: pointer;
 }
-
+#chat-content{
+	min-height: 670px;
+}
+#chat-content .bot .message{
+	width: 100%;
+}
 

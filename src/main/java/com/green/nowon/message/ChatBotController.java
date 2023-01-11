@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -61,8 +62,36 @@ public class ChatBotController {
     LocalDateTime today=LocalDateTime.now();
     String formattedtime=today.format(DateTimeFormatter.ofPattern("a H:mm"));
     
-    String responseText=service.nlpAnalyze(message.getContent());
+    String responseText=service.nlpAnalyze(message);
     
+    String depth=responseText.substring(0, 1);
+    System.out.println(">>>>>>> 응답 depth : "+ depth);
+   
+    
+    if(depth.equals("1")) {
+    	String secondMenu=responseText.substring(1);
+    	String[] tokenAndMenu=secondMenu.split("[:]");
+    	String  token=tokenAndMenu[0];
+    	String[] menues=tokenAndMenu[1].split("[,]");
+    	responseText="";
+    	responseText+=
+    	"<p><i><b>"+token+"</b></i> 에 대한 하위 메뉴를 선택하세요</p>"+ 
+	    "<div class='flex center menu'>";
+    	for(String menu:menues) {
+    		if(menu.equals(""))continue;
+    		responseText += "<div class='menu-item'><span onclick='menuclicked(this)'>"
+	    			+ menu
+	    			+ "</span><input type='hidden' class='f-token' value='"+token+"'>"
+	    			+ "</div>";
+    	}
+    	responseText +=
+	    "</div>";
+    }else if(depth.equals("2")){
+    	 responseText=responseText.substring(1);
+    	 responseText="<p>"+responseText+"</p>";
+    }
+    
+   
     //String responseText=message.getContent()+" 대한 답장입니다.";
     
     return new BotMessage(
@@ -73,7 +102,7 @@ public class ChatBotController {
 	    "</div>"+
 	    "<div class='message'>"+
 		    "<div class='part'>"+
-		    	"<p>"+responseText+"</p>"+ 
+		    	responseText+ 
 			 "</div>"+
 			 "<div class='time'>"+
 			 	formattedtime+

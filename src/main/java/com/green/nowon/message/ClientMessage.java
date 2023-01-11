@@ -10,5 +10,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class ClientMessage {
-	  private String content;
+	private String token;
+	private String content;
 }

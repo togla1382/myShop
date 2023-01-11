@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.green.nowon.domain.entity.ChatBotIntention;
-import com.green.nowon.domain.entity.ChatBotIntentionRepository;
 import com.green.nowon.domain.entity.MemberEntity;
 import com.green.nowon.domain.entity.MemberEntityRepository;
+import com.green.nowon.message.ChatBotIntention;
+import com.green.nowon.message.ChatBotIntentionRepository;
 import com.green.nowon.security.MyRole;
 
 @SpringBootTest

@@ -1,4 +1,4 @@
-package com.green.nowon.domain.entity;
+package com.green.nowon.message;
 
 import java.util.List;
 import java.util.Optional;

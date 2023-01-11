@@ -25,5 +25,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 				//.setAllowedOrigins("*")
 				.withSockJS();//uri->authorizeRequests 등록
 	}
+	
+	
 
 }
